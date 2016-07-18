@@ -1,0 +1,29 @@
+{
+  "name": "waterline_extensions",
+  "version": "0.1.0",
+  "description": "Extensions methods to waterline",
+  "main": "index.js",
+  "scripts": {
+    "test": "lab"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mickelindahl/waterline_extensions.git"
+  },
+  "author": "Mikael Lindahl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mickelindahl/waterline_extensions/issues"
+  },
+  "homepage": "https://github.com/mickelindahl/waterline_extensions#readme",
+  "dependencies": {
+    "async": "^2.0.0",
+    "hapi": "^13.5.0",
+    "hapi-waterline": "^0.1.2",
+    "sails-memory": "^0.10.7"
+  },
+  "devDependencies": {
+    "code": "^3.0.1",
+    "lab": "^10.9.0"
+  }
+}
