@@ -26,7 +26,9 @@ lab.experiment('waterline', function () {
                 // console.log(Model)
                 var data=[];
                 for (var i=0; i<10;i++){
-                    data.push({'test':' entry '+i})
+                    data.push({
+                        test:' entry '+i,
+                    })
                 }
                 Model.create(data).exec( function(err, models){
                     done();
@@ -38,7 +40,8 @@ lab.experiment('waterline', function () {
     lab.test('createOrUpdate', function (done) {
         var data=[];
         for (var i=0; i<20;i++){
-            data.push({'test':' entry '+i})
+            data.push({test:' entry '+i,
+                dummy:'hej'})
         }
         var Model=server.getModel('test');
         var options={
@@ -50,14 +53,14 @@ lab.experiment('waterline', function () {
 
             for (var i=0;i<10;i++){
                 Code.expect(models[i].createdAt.toJSON()==models[i].updatedAt.toJSON()).to.be.false();
+                Code.expect('hej'==models[i].dummy).to.be.true();
+
             }
             for (var i=10;i<20;i++){
                 Code.expect(models[i].createdAt.toJSON()==models[i].updatedAt.toJSON()).to.be.true();
+                Code.expect('hej'==models[i].dummy).to.be.true();
             }
-
             done()
         })
-
     });
-
 });

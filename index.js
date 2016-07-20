@@ -19,7 +19,7 @@ function createOrUpdate(options, callback) {
                     return _callback(err);
                 }
                 if (models.length == 0) {
-                    options.model.create(criteria, res).exec(function (err, model) {
+                    options.model.create(res).exec(function (err, model) {
                         if (err) {
                             return _callback(err);
                         }

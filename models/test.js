@@ -9,7 +9,8 @@ module.exports = {
     identity: 'test',
 
     attributes: {
-        test: 'string'
+        test: 'string',
+        dummy: 'string'
     },
 
     createOrUpdate:function(options, callback){
