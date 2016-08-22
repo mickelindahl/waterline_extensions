@@ -18,12 +18,12 @@
   "homepage": "https://github.com/mickelindahl/waterline_extensions#readme",
   "dependencies": {
     "async": "^2.0.0",
-    "hapi": "^13.5.0",
+    "hapi": "^14.2.0",
     "hapi-waterline": "^0.1.2",
     "sails-memory": "^0.10.7"
   },
   "devDependencies": {
     "code": "^3.0.1",
-    "lab": "^10.9.0"
+    "lab": "^11.0.1"
   }
 }
