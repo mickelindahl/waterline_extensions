@@ -10,7 +10,9 @@ module.exports = {
 
     attributes: {
         test: 'string',
-        dummy: 'string'
+        dummy: 'string',
+        dummy2:'json',
+        dummy3:'json'
     },
 
     createOrUpdate:function(options, callback){

@@ -11,7 +11,7 @@ const Code = require('code');   // assertion library
 const Lab=require('lab');
 const server = require('../test_server');
 
-var lab = exports.lab = Lab.script();
+let lab = exports.lab = Lab.script();
 
 lab.experiment('waterline', function () {
 
@@ -19,13 +19,13 @@ lab.experiment('waterline', function () {
 
 
         // console.log('before')
-        var iv = setInterval( function () {
+        let iv = setInterval( function () {
             if (server.app.readyForTest == true) {
                 clearInterval(iv);
-                var Model=server.getModel('test');
+                let Model=server.getModel('test');
                 // console.log(Model)
-                var data=[];
-                for (var i=0; i<10;i++){
+                let data=[];
+                for (let i=0; i<10;i++){
                     data.push({
                         test:' entry '+i,
                     })
@@ -38,29 +38,95 @@ lab.experiment('waterline', function () {
     });
 
     lab.test('createOrUpdate', function (done) {
-        var data=[];
-        for (var i=0; i<20;i++){
+        let data=[];
+        for (let i=0; i<20;i++){
             data.push({test:' entry '+i,
                 dummy:'hej'})
         }
-        var Model=server.getModel('test');
-        var options={
+        let Model=server.getModel('test');
+        let options={
             keys:['test'],
             results: data
         };
 
         Model.createOrUpdate(options, function(err, models){
 
-            for (var i=0;i<10;i++){
+            for (let i=0;i<10;i++){
                 Code.expect(models[i].createdAt.toJSON()==models[i].updatedAt.toJSON()).to.be.false();
                 Code.expect('hej'==models[i].dummy).to.be.true();
 
             }
-            for (var i=10;i<20;i++){
+            for (let i=10;i<20;i++){
                 Code.expect(models[i].createdAt.toJSON()==models[i].updatedAt.toJSON()).to.be.true();
                 Code.expect('hej'==models[i].dummy).to.be.true();
             }
             done()
         })
     });
+
+    lab.test('createOrUpdate append and sort', function (done) {
+
+        let data1=[];
+        let data2=[];
+
+        for (let i=0; i<2;i++){
+            data1.push({
+                test:' entry '+i,
+                dummy2:['5'],
+                dummy3:[{id:new Date().toJSON()}],
+
+            })
+        }
+
+        for (let i=0; i<2;i++){
+            data2.push({
+                test:' entry '+i,
+                dummy2:['10'],
+                dummy3:[{id:new Date(new Date().valueOf()+2000).toJSON()}],
+
+            })
+        }
+
+        let Model=server.getModel('test');
+
+        let options={
+            keys:['test'],
+            results: data1
+        };
+        Model.createOrUpdate(options, function(err, models){
+
+            let options={
+                keys:['test'],
+                results: data2,
+                append:[
+                    {
+                        key:'dummy2',
+                        sort:{
+                            order:'ascending',
+                            'callback':(val)=>{return Number(val)}
+                        }
+                    },
+                    {
+                    key:'dummy3',
+                    sort:{
+                        order:'ascending',
+                        key:'id',
+                        'callback':(val)=>{return new Date(val).valueOf()}
+                        }
+                    }
+                ]
+            }
+
+            Model.createOrUpdate(options, function(err, models) {
+
+                models.forEach((model)=>{
+                    Code.expect(Number(model.dummy2[0])>Number(model.dummy2[1])).to.be.true()
+                    Code.expect(model.dummy3[0].id>model.dummy3[1].id).to.be.true()
+                });
+
+                done()
+            })
+        })
+    });
+
 });

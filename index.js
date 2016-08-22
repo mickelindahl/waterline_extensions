@@ -1,7 +1,7 @@
 /**
  * Created by s057wl on 2016-07-18.
  */
-
+'use strict'
 const Async=require('async');
 
 function createOrUpdate(options, callback) {
@@ -26,6 +26,45 @@ function createOrUpdate(options, callback) {
                         _callback(null, model)
                     });
                 } else {
+
+                    if (models.length!=1){
+                        throw 'More than one model exit for that key, now allowed!'
+                    }
+
+                    // Push values to arrays (only these are updated)
+                    if (options.append){
+                        options.append.forEach((app)=> {
+
+                            res[app.key].forEach((val)=>{
+                                models[0][app.key].push(val)
+                            });
+                            res[app.key]= models[0][app.key]
+
+                            if (app.sort){
+
+                                // sort on each post by time
+                                res[app.key].sort((a, b)=>{
+                                    let val;
+                                    if (app.sort.order='ascending'){val=1;}
+                                    if (app.sort.order='descending'){val=-1;}
+
+                                    let cb=app.sort.callback ?  app.sort.callback :(val)=>{return val};
+
+                                    a=app.sort.key ? cb(a[app.sort.key]) : cb(a);
+                                    b=app.sort.key ? cb(b[app.sort.key]) : cb(b);
+
+                                    if ((a-b)==NaN){
+                                        let msg='Sorry a-b=NaN, callback needs to return number a='+a+' b='+b;
+                                        throw msg
+                                    }
+                                    return val*(a- b);
+
+                                });
+                            }
+
+                        });
+                    }
+
                     options.model.update(criteria, res).exec(function (err, model) {
                         if (err) {
                             console.log(err)
