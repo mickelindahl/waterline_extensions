@@ -36,9 +36,27 @@ function createOrUpdate(options, callback) {
                         options.append.forEach((app)=> {
 
                             res[app.key].forEach((val)=>{
-                                models[0][app.key].push(val)
+
+                                let add=true;
+
+                                if (app.unique){
+
+                                    // do not add if it exist
+                                    let cb = app.unique.key ? (e)=>{ return e[app.unique.key]} : (e)=>{ return e};
+                                    let cmp = app.unique.key ? val[app.unique.key]: val;
+
+                                    let pos = models[0][app.key].map( cb ).indexOf(cmp);
+
+                                    if(pos != -1){
+                                        add=false;
+                                    }
+                                }
+                                if (add){
+                                    models[0][app.key].push(val)
+                                }
+
                             });
-                            res[app.key]= models[0][app.key]
+                            res[app.key]= models[0][app.key];
 
                             if (app.sort){
 

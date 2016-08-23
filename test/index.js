@@ -17,7 +17,6 @@ lab.experiment('waterline', function () {
 
     lab.before({},function (done) {
 
-
         // console.log('before')
         let iv = setInterval( function () {
             if (server.app.readyForTest == true) {
@@ -64,26 +63,27 @@ lab.experiment('waterline', function () {
         })
     });
 
-    lab.test('createOrUpdate append and sort', function (done) {
+    lab.test('createOrUpdate append, sort and unique', function (done) {
 
         let data1=[];
         let data2=[];
+        let data3=[];
 
         for (let i=0; i<2;i++){
             data1.push({
-                test:' entry '+i,
-                dummy2:['5'],
-                dummy3:[{id:new Date().toJSON()}],
-
-            })
-        }
-
-        for (let i=0; i<2;i++){
+                test: ' entry ' + i,
+                dummy2: ['5'],
+                dummy3: [{id: new Date().toJSON()}],
+            });
             data2.push({
                 test:' entry '+i,
                 dummy2:['10'],
                 dummy3:[{id:new Date(new Date().valueOf()+2000).toJSON()}],
-
+            });
+            data3.push({
+                test:' entry '+i,
+                dummy2:['10'],
+                dummy3:data2[data2.length-1].dummy3,
             })
         }
 
@@ -101,6 +101,7 @@ lab.experiment('waterline', function () {
                 append:[
                     {
                         key:'dummy2',
+                        unique:true,
                         sort:{
                             order:'ascending',
                             'callback':(val)=>{return Number(val)}
@@ -108,6 +109,7 @@ lab.experiment('waterline', function () {
                     },
                     {
                     key:'dummy3',
+                    unique:{key:'id'},
                     sort:{
                         order:'ascending',
                         key:'id',
@@ -115,16 +117,25 @@ lab.experiment('waterline', function () {
                         }
                     }
                 ]
-            }
+            };
 
             Model.createOrUpdate(options, function(err, models) {
 
                 models.forEach((model)=>{
-                    Code.expect(Number(model.dummy2[0])>Number(model.dummy2[1])).to.be.true()
-                    Code.expect(model.dummy3[0].id>model.dummy3[1].id).to.be.true()
+                    Code.expect(Number(model.dummy2[0])>Number(model.dummy2[1])).to.be.true();
+                    Code.expect(model.dummy3[0].id>model.dummy3[1].id).to.be.true();
                 });
 
-                done()
+                options.results=data3;
+                Model.createOrUpdate(options, function(err, models) {
+                    models.forEach((model)=>{
+                        Code.expect(model.dummy2.length).to.equal(2);
+                        Code.expect(model.dummy3.length).to.equal(2);
+                    });
+                    done()
+                });
+
+
             })
         })
     });
