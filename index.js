@@ -3,9 +3,21 @@
  */
 'use strict'
 const Async=require('async');
+const debug=require('debug')('waterline_extension');
 
 function createOrUpdate(options, callback) {
     var calls=[];
+
+    let criterias=[]
+
+    options.results.forEach(function (res) {
+
+            var criteria = {};
+            options.keys.forEach(function (key) {
+                criteria[key] = res[key]
+            });
+    });
+
 
     options.results.forEach(function (res) {
         calls.push(function(_callback){
@@ -48,9 +60,27 @@ function createOrUpdate(options, callback) {
                                     let pos = models[0][app.key].map( cb ).indexOf(cmp);
 
                                     if(pos != -1){
+                                        if (app.update){
+
+                                            debug('app.update');
+
+                                            // update if value exists
+                                            if(app.unique.key){
+                                                for (let key in val){
+
+                                                    debug(models[0][app.key][pos][key]);
+
+                                                    models[0][app.key][pos][key]=(app.update.order && app.update.order.key==key)
+                                                        ? app.update.order.fun(val[key], models[0][app.key][pos][key])
+                                                        : val[key]
+
+                                                }
+                                            }
+                                        }
                                         add=false;
                                     }
                                 }
+
                                 if (add){
                                     models[0][app.key].push(val)
                                 }
