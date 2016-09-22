@@ -44,8 +44,8 @@ function createOrUpdate(options, callback) {
                     }
 
                     // Push values to arrays (only these are updated)
-                    if (options.append){
-                        options.append.forEach((app)=> {
+                    if (options.append_or_update){
+                        options.append_or_update.forEach((app)=> {
 
                             res[app.key].forEach((val)=>{
 
@@ -60,7 +60,7 @@ function createOrUpdate(options, callback) {
                                     let pos = models[0][app.key].map( cb ).indexOf(cmp);
 
                                     if(pos != -1){
-                                        if (app.update){
+                                        if (app.order){
 
                                             debug('app.update');
 
@@ -70,8 +70,8 @@ function createOrUpdate(options, callback) {
 
                                                     debug(models[0][app.key][pos][key]);
 
-                                                    models[0][app.key][pos][key]=(app.update.order && app.update.order.key==key)
-                                                        ? app.update.order.fun(val[key], models[0][app.key][pos][key])
+                                                    models[0][app.key][pos][key]=(app.order && app.order.key==key)
+                                                        ? app.order.fun(val[key], models[0][app.key][pos][key])
                                                         : val[key]
 
                                                 }

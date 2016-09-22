@@ -107,7 +107,7 @@ lab.experiment('waterline', function () {
             let options={
                 keys:['test'],
                 results: data2,
-                append:[
+                append_or_update:[
                     {
                         key:'dummy2',
                         unique:true,
@@ -124,14 +124,14 @@ lab.experiment('waterline', function () {
                             key:'id',
                             'callback':(val)=>{return new Date(val).valueOf()}
                         },
-                        update:{
-                            order: {
-                                key: 'date',
-                                fun: (a, b)=> {
-                                    return new Date(Math.max(new Date(a).valueOf(), new Date(b).valueOf()))
-                                }
+
+                        order: { //update order
+                            key: 'date',
+                            fun: (a, b)=> {
+                                return new Date(Math.max(new Date(a).valueOf(), new Date(b).valueOf()))
                             }
                         }
+
                     }
                 ]
             };
