@@ -8,19 +8,10 @@ const debug=require('debug')('waterline_extension');
 function createOrUpdate(options, callback) {
     var calls=[];
 
-    let criterias=[]
-
     options.results.forEach(function (res) {
 
-            var criteria = {};
-            options.keys.forEach(function (key) {
-                criteria[key] = res[key]
-            });
-    });
-
-
-    options.results.forEach(function (res) {
         calls.push(function(_callback){
+
             var criteria={};
             options.keys.forEach(function(key){
                 criteria[key]=res[key]
@@ -43,7 +34,7 @@ function createOrUpdate(options, callback) {
                         throw 'More than one model exit for that key, now allowed!'
                     }
 
-                    // Push values to arrays (only these are updated)
+                    // Push values to arrays or append to value if it exists in the array
                     if (options.append_or_update){
                         options.append_or_update.forEach((app)=> {
 
@@ -115,7 +106,7 @@ function createOrUpdate(options, callback) {
 
                     options.model.update(criteria, res).exec(function (err, model) {
                         if (err) {
-                            console.log(err)
+                            console.error(err);
                             return _callback(err);
                         }
                         _callback(null, model[0])
