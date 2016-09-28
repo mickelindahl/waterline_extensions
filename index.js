@@ -8,16 +8,16 @@ const debug=require('debug')('waterline_extension');
 function createOrUpdate(options, callback) {
     var calls=[];
 
-    options.results.forEach(function (res) {
+    options.results.forEach( (res)=> {
 
         calls.push(function(_callback){
 
             var criteria={};
-            options.keys.forEach(function(key){
+            options.keys.forEach((key)=>{
                 criteria[key]=res[key]
             });
 
-            debug('Criteria', criteria)
+            debug('Criteria/res', criteria, res);
 
             options.model.find(criteria).exec(function (err, models) {
 
