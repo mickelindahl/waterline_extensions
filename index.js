@@ -17,7 +17,7 @@ function createOrUpdate(options, callback) {
                 criteria[key]=res[key]
             });
 
-            debug('Criteria/res', criteria, res);
+            debug('Criteria', criteria);
 
             options.model.find(criteria).exec(function (err, models) {
 
