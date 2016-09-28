@@ -17,11 +17,17 @@ function createOrUpdate(options, callback) {
                 criteria[key]=res[key]
             });
 
+            debug('Criteria', criteria)
+
             options.model.find(criteria).exec(function (err, models) {
+
                 if (err) {
                     return _callback(err);
                 }
                 if (models.length == 0) {
+
+                    debug('\x1b[0;31mModel not found\x1b[0;37m', models);
+
                     options.model.create(res).exec(function (err, model) {
                         if (err) {
                             return _callback(err);
@@ -33,6 +39,8 @@ function createOrUpdate(options, callback) {
                     if (models.length!=1){
                         throw 'More than one model exit for that key, now allowed!'
                     }
+
+                    debug('Model found', models);
 
                     // Push values to arrays or append to value if it exists in the array
                     if (options.append_or_update){

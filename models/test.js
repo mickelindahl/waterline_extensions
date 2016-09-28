@@ -9,7 +9,7 @@ module.exports = {
     identity: 'test',
 
     attributes: {
-        test: 'string',
+        test: 'datetime',
         dummy: 'string',
         dummy2:'json',
         dummy3:'json'
