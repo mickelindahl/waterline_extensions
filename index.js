@@ -1,7 +1,7 @@
 /**
  * Created by s057wl on 2016-07-18.
  */
-'use strict'
+'use strict';
 const Async=require('async');
 const debug=require('debug')('waterline_extension');
 
@@ -37,7 +37,7 @@ function createOrUpdate(options, callback) {
                 } else {
 
                     if (models.length!=1){
-                        throw 'More than one model exit for that key, now allowed!'
+                        return _callback('More than one model exit for that key, now allowed!', null)
                     }
 
                     debug('Model found', models);
