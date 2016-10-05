@@ -124,7 +124,9 @@ function _createOrUpdate(options, res){
 }
 
 function createOrUpdate(options, done) {
-    var calls=[];
+    // var calls=[];
+
+    debug('entering createOrUpdate')
 
     var current = Promise.resolve();
 
