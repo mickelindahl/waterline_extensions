@@ -36,7 +36,7 @@ function _createOrUpdate(options, res){
 
                 if (models.length!=1){
                     debug('More than one model exit for that key, now allowed!');
-                    return _callback('More than one model exit for that key, now allowed!', null)
+                    return reject('More than one model exit for that key, now allowed!')
                 }
 
                 debug('\x1b[0;33mModel found updating\x1b[0;37m');
