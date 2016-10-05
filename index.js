@@ -2,133 +2,167 @@
  * Created by s057wl on 2016-07-18.
  */
 'use strict';
-const Async=require('async');
+const Promise=require('bluebird')
 const debug=require('debug')('waterline_extension');
 
-function createOrUpdate(options, callback) {
-    var calls=[];
 
-    options.results.forEach( (res)=> {
+function _createOrUpdate(options, res){
 
-        calls.push(function(_callback){
+    return new Promise((resolve, reject)=>{
 
-            var criteria={};
-            options.keys.forEach((key)=>{
-                criteria[key]=res[key]
-            });
+        let criteria={};
+        options.keys.forEach((key)=>{
+            criteria[key]=res[key]
+        });
 
-            debug('Criteria', criteria);
+        debug('Criteria', criteria);
 
-            options.model.find(criteria).exec(function (err, models) {
+        options.model.find(criteria).exec(function (err, models) {
 
-                if (err) {
-                    return _callback(err);
-                }
-                if (models.length == 0) {
+            if (err) {
+                return _callback(err);
+            }
+            if (models.length == 0) {
 
-                    debug('\x1b[0;31mModel not found creating\x1b[0;37m');
+                debug('\x1b[0;31mModel not found creating\x1b[0;37m');
 
-                    options.model.create(res).exec(function (err, model) {
-                        if (err) {
-                            return _callback(err);
-                        }
-                        _callback(null, model)
-                    });
-                } else {
-
-                    if (models.length!=1){
-                        debug('More than one model exit for that key, now allowed!');
-                        return _callback('More than one model exit for that key, now allowed!', null)
+                options.model.create(res).exec(function (err, model) {
+                    if (err) {
+                        return reject(err)
                     }
+                    resolve(model)
+                });
+            } else {
 
-                    debug('\x1b[0;33mModel found updating\x1b[0;37m');
+                if (models.length!=1){
+                    debug('More than one model exit for that key, now allowed!');
+                    return _callback('More than one model exit for that key, now allowed!', null)
+                }
 
-                    // Push values to arrays or append to value if it exists in the array
-                    if (options.append_or_update){
-                        options.append_or_update.forEach((app)=> {
+                debug('\x1b[0;33mModel found updating\x1b[0;37m');
 
-                            res[app.key].forEach((val)=>{
+                // Push values to arrays or append to value if it exists in the array
+                if (options.append_or_update){
+                    options.append_or_update.forEach((app)=> {
 
-                                let add=true;
+                        res[app.key].forEach((val)=>{
 
-                                if (app.unique){
+                            let add=true;
 
-                                    // do not add if it exist
-                                    let cb = app.unique.key ? (e)=>{ return e[app.unique.key]} : (e)=>{ return e};
-                                    let cmp = app.unique.key ? val[app.unique.key]: val;
+                            if (app.unique){
 
-                                    let pos = models[0][app.key].map( cb ).indexOf(cmp);
+                                // do not add if it exist
+                                let cb = app.unique.key ? (e)=>{ return e[app.unique.key]} : (e)=>{ return e};
+                                let cmp = app.unique.key ? val[app.unique.key]: val;
 
-                                    if(pos != -1){
-                                        if (app.order){
+                                let pos = models[0][app.key].map( cb ).indexOf(cmp);
 
-                                            debug('app.update');
+                                if(pos != -1){
+                                    if (app.order){
 
-                                            // update if value exists
-                                            if(app.unique.key){
-                                                for (let key in val){
+                                        debug('app.update');
 
-                                                    debug(models[0][app.key][pos][key]);
+                                        // update if value exists
+                                        if(app.unique.key){
+                                            for (let key in val){
 
-                                                    models[0][app.key][pos][key]=(app.order && app.order.key==key)
-                                                        ? app.order.fun(val[key], models[0][app.key][pos][key])
-                                                        : val[key]
+                                                debug(models[0][app.key][pos][key]);
 
-                                                }
+                                                models[0][app.key][pos][key]=(app.order && app.order.key==key)
+                                                    ? app.order.fun(val[key], models[0][app.key][pos][key])
+                                                    : val[key]
+
                                             }
                                         }
-                                        add=false;
                                     }
+                                    add=false;
                                 }
+                            }
 
-                                if (add){
-                                    models[0][app.key].push(val)
-                                }
-
-                            });
-                            res[app.key]= models[0][app.key];
-
-                            if (app.sort){
-
-                                // sort on each post by time
-                                res[app.key].sort((a, b)=>{
-                                    let val;
-                                    if (app.sort.order='ascending'){val=1;}
-                                    if (app.sort.order='descending'){val=-1;}
-
-                                    let cb=app.sort.callback ?  app.sort.callback :(val)=>{return val};
-
-                                    a=app.sort.key ? cb(a[app.sort.key]) : cb(a);
-                                    b=app.sort.key ? cb(b[app.sort.key]) : cb(b);
-
-                                    if ((a-b)==NaN){
-                                        let msg='Sorry a-b=NaN, callback needs to return number a='+a+' b='+b;
-                                        throw msg
-                                    }
-                                    return val*(a- b);
-
-                                });
+                            if (add){
+                                models[0][app.key].push(val)
                             }
 
                         });
-                    }
+                        res[app.key]= models[0][app.key];
 
-                    options.model.update(criteria, res).exec(function (err, model) {
-                        if (err) {
-                            console.error(err);
-                            return _callback(err);
+                        if (app.sort){
+
+                            // sort on each post by time
+                            res[app.key].sort((a, b)=>{
+                                let val;
+                                if (app.sort.order='ascending'){val=1;}
+                                if (app.sort.order='descending'){val=-1;}
+
+                                let cb=app.sort.callback ?  app.sort.callback :(val)=>{return val};
+
+                                a=app.sort.key ? cb(a[app.sort.key]) : cb(a);
+                                b=app.sort.key ? cb(b[app.sort.key]) : cb(b);
+
+                                if ((a-b)==NaN){
+                                    let msg='Sorry a-b=NaN, callback needs to return number a='+a+' b='+b;
+                                    throw msg
+                                }
+                                return val*(a- b);
+
+                            });
                         }
-                        _callback(null, model[0])
+
                     });
                 }
-            })
+
+                options.model.update(criteria, res).exec(function (err, model) {
+                    if (err) {
+                        console.error(err);
+                        return reject(err);
+                    }
+                    resolve(model[0])
+                });
+            }
         })
+    })
+}
+
+function createOrUpdate(options, done) {
+    var calls=[];
+
+    var current = Promise.resolve();
+
+    return Promise.all(options.results.map((res)=> {
+        current = current.then(function() {
+
+            debug('promise.all step')
+
+            return _createOrUpdate(options, res)
+        });
+
+        return current;
+
+    })).then((results)=>{
+
+        if (done) done(null, results);
+        else return results
+
+    }).catch((err)=>{
+
+        if (done) done(err, null);
+        else throw err
+
     });
 
-    Async.series(calls,function(err, models){
-        // console.log(models)
-        callback(err, models)
-    })
+
+    // options.results.forEach( (res)=> {
+    //
+    //     calls.push(function(_callback){
+    //
+    //
+    //     })
+    // });
+    //
+    // Async.series(calls,function(err, models){
+    //     // console.log(models)
+    //     callback(err, models)
+    // })
 }
 
 module.exports={
