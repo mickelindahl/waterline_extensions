@@ -192,4 +192,66 @@ lab.experiment('waterline', function () {
         })
     });
 
+
+    lab.test('createOrUpdate append with or on key', function (done) {
+
+        let data1=[];
+        let data2=[];
+        let data3=[];
+        let data4=[];
+
+
+        for (let i=0; i<2;i++){
+
+            let id=i==0 ? 'id1' : 'id2';
+
+            data1.push({
+                test: new Date(_key_date.valueOf()+i*3600),
+                dummy3: [{[id]:i, date: new Date()}],
+            });
+            data2.push({
+                test:new Date(_key_date.valueOf()+i*3600),
+                dummy3:[{[id]:i, date:new Date(new Date().valueOf()+2000)}],
+            });
+
+            // data3.push({
+            //     test:new Date(_key_date.valueOf()+i*3600),
+            //     dummy3:[{[id]:i+1, date:new Date(new Date().valueOf()+3600*4*1000)},{id:i-2, date:new Date(new Date().valueOf()+3600*4*1000)}],
+            // })
+        }
+
+        let Model=server.getModel('test');
+
+        let options={
+            keys:['test'],
+            results: data1
+        };
+        Model.createOrUpdate(options, function(err, models){
+
+            let options={
+                keys:['test'],
+                results: data2,
+                append_or_update:[
+                    {
+                        key:'dummy3',
+                        unique:{key:{or:['id1', 'id2']}},
+                    }
+                ]
+            };
+
+            Model.createOrUpdate(options, function(err, models) {
+
+                if(err) console.error(err)
+
+                debug(models, models[0].dummy3[0].date, data2[0].dummy3[0].date)
+                Code.expect(models[0].dummy3[0].id1==data2[0].dummy3[0].id1).to.be.true();
+                Code.expect(models[0].dummy3[0].date.valueOf()==data2[0].dummy3[0].date.valueOf()).to.be.true();
+                Code.expect(models[1].dummy3[0].id2==data2[1].dummy3[0].id2).to.be.true();
+
+                done()
+
+            })
+        })
+    });
+
 });

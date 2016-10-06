@@ -2,171 +2,220 @@
  * Created by s057wl on 2016-07-18.
  */
 'use strict';
-const Promise=require('bluebird')
-const debug=require('debug')('waterline_extension');
+const Promise = require( 'bluebird' )
+const debug = require( 'debug' )( 'waterline_extension' );
 
 
-function _createOrUpdate(options, res){
+function _createOrUpdate( options, res ) {
 
-    return new Promise((resolve, reject)=>{
+    return new Promise( ( resolve, reject )=> {
 
-        let criteria={};
-        options.keys.forEach((key)=>{
-            criteria[key]=res[key]
-        });
+        let criteria = {};
+        options.keys.forEach( ( key )=> {
+            criteria[key] = res[key]
+        } );
 
-        debug('Criteria', criteria);
+        debug( 'Criteria', criteria );
 
-        options.model.find(criteria).exec(function (err, models) {
+        options.model.find( criteria ).exec( function ( err, models ) {
 
-            if (err) {
-                return _callback(err);
+            if ( err ) {
+                return _callback( err );
             }
-            if (models.length == 0) {
+            if ( models.length == 0 ) {
 
-                debug('\x1b[0;31mModel not found creating\x1b[0;37m');
+                debug( '\x1b[0;31mModel not found creating\x1b[0;37m' );
 
-                options.model.create(res).exec(function (err, model) {
-                    if (err) {
-                        return reject(err)
+                options.model.create( res ).exec( function ( err, model ) {
+                    if ( err ) {
+                        return reject( err )
                     }
-                    resolve(model)
-                });
+                    resolve( model )
+                } );
             } else {
 
-                if (models.length!=1){
-                    debug('More than one model exit for that key, now allowed!');
-                    return reject('More than one model exit for that key, now allowed!')
+                if ( models.length != 1 ) {
+                    debug( 'More than one model exit for that key, now allowed!' );
+                    return reject( 'More than one model exit for that key, now allowed!' )
                 }
 
-                debug('\x1b[0;33mModel found updating\x1b[0;37m');
+                debug( '\x1b[0;33mModel found updating\x1b[0;37m' );
 
                 // Push values to arrays or append to value if it exists in the array
-                if (options.append_or_update){
-                    options.append_or_update.forEach((app)=> {
-
-                        res[app.key].forEach((val)=>{
-
-                            let add=true;
-
-                            if (app.unique){
-
-                                // do not add if it exist
-                                let cb = app.unique.key ? (e)=>{ return e[app.unique.key]} : (e)=>{ return e};
-                                let cmp = app.unique.key ? val[app.unique.key]: val;
-
-                                let pos = models[0][app.key].map( cb ).indexOf(cmp);
-
-                                if(pos != -1){
-                                    if (app.order){
-
-                                        debug('app.update');
-
-                                        // update if value exists
-                                        if(app.unique.key){
-                                            for (let key in val){
-
-                                                debug(models[0][app.key][pos][key]);
-
-                                                models[0][app.key][pos][key]=(app.order && app.order.key==key)
-                                                    ? app.order.fun(val[key], models[0][app.key][pos][key])
-                                                    : val[key]
-
-                                            }
-                                        }
-                                    }
-                                    add=false;
-                                }
-                            }
-
-                            if (add){
-                                models[0][app.key].push(val)
-                            }
-
-                        });
-                        res[app.key]= models[0][app.key];
-
-                        if (app.sort){
-
-                            // sort on each post by time
-                            res[app.key].sort((a, b)=>{
-                                let val;
-                                if (app.sort.order='ascending'){val=1;}
-                                if (app.sort.order='descending'){val=-1;}
-
-                                let cb=app.sort.callback ?  app.sort.callback :(val)=>{return val};
-
-                                a=app.sort.key ? cb(a[app.sort.key]) : cb(a);
-                                b=app.sort.key ? cb(b[app.sort.key]) : cb(b);
-
-                                if ((a-b)==NaN){
-                                    let msg='Sorry a-b=NaN, callback needs to return number a='+a+' b='+b;
-                                    throw msg
-                                }
-                                return val*(a- b);
-
-                            });
-                        }
-
-                    });
+                if ( options.append_or_update ) {
+                    res = appemdOrUpdate( options, res, models )
                 }
 
-                options.model.update(criteria, res).exec(function (err, model) {
-                    if (err) {
-                        console.error(err);
-                        return reject(err);
+                options.model.update( criteria, res ).exec( function ( err, model ) {
+                    if ( err ) {
+                        console.error( err );
+                        return reject( err );
                     }
-                    resolve(model[0])
-                });
+                    resolve( model[0] )
+                } );
             }
-        })
-    })
+        } )
+    } )
 }
 
-function createOrUpdate(options, done) {
+
+function appemdOrUpdate( options, res, models ) {
+
+    options.append_or_update.forEach( ( app )=> {
+
+        res[app.key].forEach( ( val )=> {
+
+            let add = true;
+
+            if ( app.unique ) {
+
+                if ( typeof app.unique.key == 'object' ) {
+
+                }
+
+                let callback;
+                let cmp;
+
+                debug(typeof app.unique.key)
+
+                switch ( typeof app.unique.key ) {
+
+                    case "undefined":
+
+                      callback = ( e )=> {
+                            return e
+                        };
+                        cmp = val;
+                        break;
+
+                    case 'string':
+
+                        callback = ( e )=> {
+                            return e[app.unique.key]
+                        };
+                        cmp = val[app.unique.key];
+                        break;
+
+                    case 'object':
+
+                        if ( app.unique.key.or ) {
+
+                            let i = val[app.unique.key.or[0]] ? 0 : 1;
+                            callback = ( e )=> {
+                                return e[app.unique.key.or[i]]
+                            };
+                            cmp = val[app.unique.key.or[i]];
+
+                            break;
+
+                        } else {
+                            throw 'Unknown operation on unique key'
+                        }
+                }
+
+                debug(callback)
+                debug(cmp)
+
+                // do not add if it exist
+                let pos = models[0][app.key].map( callback ).indexOf( cmp );
+
+                debug(pos)
+
+                if ( pos != -1 ) {
+                    if ( app.order ) {
+
+                        debug( 'app.update' );
+
+                        // update if value exists
+                        if ( app.unique.key ) {
+
+                            for ( let key in val ) {
+
+                                debug( models[0][app.key][pos][key] );
+
+                                models[0][app.key][pos][key] = (app.order && app.order.key == key)
+                                    ? app.order.fun( val[key], models[0][app.key][pos][key] )
+                                    : val[key]
+
+                            }
+                        }
+                    }
+                    add = false;
+                }
+            }
+
+            if ( add ) {
+                models[0][app.key].push( val )
+            }
+
+        } );
+        res[app.key] = models[0][app.key];
+
+        if ( app.sort ) {
+
+            // sort on each post by time
+            res[app.key].sort( ( a, b )=> {
+                let val;
+                if ( app.sort.order = 'ascending' ) {
+                    val = 1;
+                }
+                if ( app.sort.order = 'descending' ) {
+                    val = -1;
+                }
+
+                let cb = app.sort.callback ? app.sort.callback : ( val )=> {
+                    return val
+                };
+
+                a = app.sort.key ? cb( a[app.sort.key] ) : cb( a );
+                b = app.sort.key ? cb( b[app.sort.key] ) : cb( b );
+
+                if ( (a - b) == NaN ) {
+                    let msg = 'Sorry a-b=NaN, callback needs to return number a=' + a + ' b=' + b;
+                    throw msg
+                }
+                return val * (a - b);
+
+            } );
+        }
+
+    } );
+
+    return res
+
+}
+
+function createOrUpdate( options, done ) {
     // var calls=[];
 
-    debug('entering createOrUpdate')
+    debug( 'entering createOrUpdate' )
 
     var current = Promise.resolve();
 
-    return Promise.all(options.results.map((res)=> {
-        current = current.then(function() {
+    return Promise.all( options.results.map( ( res )=> {
+        current = current.then( function () {
 
-            debug('promise.all step')
+            debug( 'promise.all step' )
 
-            return _createOrUpdate(options, res)
-        });
+            return _createOrUpdate( options, res )
+        } );
 
         return current;
 
-    })).then((results)=>{
+    } ) ).then( ( results )=> {
 
-        if (done) done(null, results);
+        if ( done ) done( null, results );
         else return results
 
-    }).catch((err)=>{
+    } ).catch( ( err )=> {
 
-        if (done) done(err, null);
+        if ( done ) done( err, null );
         else throw err
 
-    });
+    } );
 
-
-    // options.results.forEach( (res)=> {
-    //
-    //     calls.push(function(_callback){
-    //
-    //
-    //     })
-    // });
-    //
-    // Async.series(calls,function(err, models){
-    //     // console.log(models)
-    //     callback(err, models)
-    // })
 }
 
-module.exports={
-    'createOrUpdate':createOrUpdate
+module.exports = {
+    'createOrUpdate': createOrUpdate
 }
