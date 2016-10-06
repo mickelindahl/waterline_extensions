@@ -203,15 +203,15 @@ lab.experiment('waterline', function () {
 
         for (let i=0; i<2;i++){
 
-            let id=i==0 ? 'id1' : 'id2';
+            let date=i==0 ? 'date1' : 'date2';
 
             data1.push({
                 test: new Date(_key_date.valueOf()+i*3600),
-                dummy3: [{[id]:i, date: new Date()}],
+                dummy3: [{id:i, [date]: new Date()}],
             });
             data2.push({
                 test:new Date(_key_date.valueOf()+i*3600),
-                dummy3:[{[id]:i, date:new Date(new Date().valueOf()+2000)}],
+                dummy3:[{id:i, [date]:new Date(new Date().valueOf()+2000)}],
             });
 
             // data3.push({
@@ -234,7 +234,8 @@ lab.experiment('waterline', function () {
                 append_or_update:[
                     {
                         key:'dummy3',
-                        unique:{key:{or:['id1', 'id2']}},
+                        type:'datetime',
+                        unique:{key:{or:['date1', 'date2']}},
                     }
                 ]
             };
@@ -243,10 +244,10 @@ lab.experiment('waterline', function () {
 
                 if(err) console.error(err)
 
-                debug(models, models[0].dummy3[0].date, data2[0].dummy3[0].date)
-                Code.expect(models[0].dummy3[0].id1==data2[0].dummy3[0].id1).to.be.true();
-                Code.expect(models[0].dummy3[0].date.valueOf()==data2[0].dummy3[0].date.valueOf()).to.be.true();
-                Code.expect(models[1].dummy3[0].id2==data2[1].dummy3[0].id2).to.be.true();
+                debug(models, models[0].dummy3[0].date1, data2[0].dummy3[0].date1)
+                Code.expect(models[0].dummy3[0].date1.valueOf()==data2[0].dummy3[0].date1.valueOf()).to.be.true();
+                Code.expect(models[0].dummy3[0].id==data2[0].dummy3[0].id).to.be.true();
+                Code.expect(models[1].dummy3[0].date2.valueOf()==data2[1].dummy3[0].date2.valueOf()).to.be.true();
 
                 done()
 

@@ -91,7 +91,9 @@ function appemdOrUpdate( options, res, models ) {
                     case 'string':
 
                         callback = ( e )=> {
-                            return e[app.unique.key]
+                            return app.unique.type=='datetime'
+                                ? new Date(e[app.unique.key])
+                                : e[app.unique.key]
                         };
                         cmp = val[app.unique.key];
                         break;
@@ -102,19 +104,14 @@ function appemdOrUpdate( options, res, models ) {
 
                         if ( app.unique.key.or ) {
 
-                            if (val[app.unique.key.or[0]]){
-                                callback = ( e )=> {
-                                    debug('callback 0', e[app.unique.key.or[0]])
-                                    return e[app.unique.key.or[0]]
-                                }
-                                cmp = val[app.unique.key.or[0]];
-                            } else{
-                                callback = ( e )=> {
-                                    debug('callback 1', e[app.unique.key.or[1]])
-                                    return e[app.unique.key.or[1]]}
-                                cmp = val[app.unique.key.or[1]];
+                            let i = val[app.unique.key.or[0]] ? 0 : 1;
+                            callback = ( e )=> {
+                                debug('callback 0', e[app.unique.key.or[0]])
+                                return app.unique.type=='datetime'
+                                    ? new Date(e[app.unique.key.or[i]])
+                                    : e[app.unique.key.or[0]]
                             };
-
+                            cmp = val[app.unique.key.or[i]];
                             break;
 
                         } else {
