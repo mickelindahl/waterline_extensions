@@ -98,13 +98,22 @@ function appemdOrUpdate( options, res, models ) {
 
                     case 'object':
 
+                        debug('object')
+
                         if ( app.unique.key.or ) {
 
-                            let i = val[app.unique.key.or[0]] ? 0 : 1;
-                            callback = ( e )=> {
-                                return e[app.unique.key.or[i]]
+                            if (val[app.unique.key.or[0]]){
+                                callback = ( e )=> {
+                                    debug('callback 0', e[app.unique.key.or[0]])
+                                    return e[app.unique.key.or[0]]
+                                }
+                                cmp = val[app.unique.key.or[0]];
+                            } else{
+                                callback = ( e )=> {
+                                    debug('callback 1', e[app.unique.key.or[1]])
+                                    return e[app.unique.key.or[1]]}
+                                cmp = val[app.unique.key.or[1]];
                             };
-                            cmp = val[app.unique.key.or[i]];
 
                             break;
 
@@ -113,13 +122,13 @@ function appemdOrUpdate( options, res, models ) {
                         }
                 }
 
-                debug(callback)
-                debug(cmp)
+                debug('callback', callback)
+                debug('cmp', cmp)
 
                 // do not add if it exist
                 let pos = models[0][app.key].map( callback ).indexOf( cmp );
 
-                debug(pos)
+                debug('pos', pos)
 
                 if ( pos != -1 ) {
                     if ( app.order ) {
