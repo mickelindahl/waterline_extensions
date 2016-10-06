@@ -106,7 +106,9 @@ function appemdOrUpdate( options, res, models ) {
 
                             let i = val[app.unique.key.or[0]] ? 0 : 1;
                             callback = ( e )=> {
-                                debug('callback 0', e[app.unique.key.or[0]])
+                                debug('callback '+i, app.unique.type=='datetime'
+                                    ? new Date(e[app.unique.key.or[i]])
+                                    : e[app.unique.key.or[0]]);
                                 return app.unique.type=='datetime'
                                     ? new Date(e[app.unique.key.or[i]])
                                     : e[app.unique.key.or[0]]

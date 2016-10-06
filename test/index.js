@@ -234,8 +234,9 @@ lab.experiment('waterline', function () {
                 append_or_update:[
                     {
                         key:'dummy3',
-                        type:'datetime',
-                        unique:{key:{or:['date1', 'date2']}},
+                        unique:{
+                            key:{or:['date1', 'date2']},
+                            type:'datetime'},
                     }
                 ]
             };
