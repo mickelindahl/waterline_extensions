@@ -44,9 +44,13 @@ function _createOrUpdate( options, res ) {
                 // Push values to arrays or append to value if it exists in the array
                 if ( options.append_or_update ) {
                     res = appemdOrUpdate( options, res, models )
+                    // debug('updating',res)
                 }
 
                 options.model.update( criteria, res ).exec( function ( err, model ) {
+                    debug('createdAt',model[0].createdAt)
+                    debug('updatedAt', model[0].updatedAt)
+
                     if ( err ) {
                         console.error( err );
                         return reject( err );
@@ -57,7 +61,6 @@ function _createOrUpdate( options, res ) {
         } )
     } )
 }
-
 
 function appemdOrUpdate( options, res, models ) {
 
@@ -107,10 +110,10 @@ function appemdOrUpdate( options, res, models ) {
                             let i = val[app.unique.key.or[0]] ? 0 : 1;
                             callback = ( e )=> {
                                 debug('callback '+i, app.unique.type=='datetime'
-                                    ? new Date(e[app.unique.key.or[i]])
+                                    ? (new Date(e[app.unique.key.or[i]])).valueOf()
                                     : e[app.unique.key.or[0]]);
                                 return app.unique.type=='datetime'
-                                    ? new Date(e[app.unique.key.or[i]])
+                                    ? (new Date(e[app.unique.key.or[i]])).valueOf()
                                     : e[app.unique.key.or[0]]
                             };
                             cmp = val[app.unique.key.or[i]];
@@ -121,8 +124,8 @@ function appemdOrUpdate( options, res, models ) {
                         }
                 }
 
-                debug('callback', callback)
-                debug('cmp', cmp)
+                debug('callback', callback);
+                debug('cmp', cmp);
 
                 // do not add if it exist
                 let pos = models[0][app.key].map( callback ).indexOf( cmp );
@@ -202,8 +205,6 @@ function createOrUpdate( options, done ) {
 
     return Promise.all( options.results.map( ( res )=> {
         current = current.then( function () {
-
-            debug( 'promise.all step' )
 
             return _createOrUpdate( options, res )
         } );
