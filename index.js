@@ -95,12 +95,10 @@ function appemdOrUpdate( options, res, models ) {
 
                         callback = ( e )=> {
                             return app.unique.type=='datetime'
-                                ? new Date(e[app.unique.key])
-                                : e[app.unique.key].valueOf()
+                                ? new Date(e[app.unique.key]).valueOf()
+                                : e[app.unique.key]
                         };
-                        cmp = app.unique.type=='datetime'
-                            ? new Date(val[app.unique.key])
-                            : val[app.unique.key].valueOf();
+                        cmp =  callback(val);
                         break;
 
                     case 'object':
@@ -126,9 +124,9 @@ function appemdOrUpdate( options, res, models ) {
                         }
                 }
 
-                cmp=app.unique.type=='datetime'
-                    ? new Date(cmp)
-                    : cmp
+                // cmp=app.unique.type=='datetime'
+                //     ? new Date(cmp)
+                //     : cmp
 
                 debug('callback', callback);
                 debug('cmp', cmp);
@@ -178,10 +176,10 @@ function appemdOrUpdate( options, res, models ) {
             res[app.key].sort( ( a, b )=> {
                 let val;
                 if ( app.sort.order = 'ascending' ) {
-                    val = 1;
+                    val = -1;
                 }
                 if ( app.sort.order = 'descending' ) {
-                    val = -1;
+                    val = 1;
                 }
 
                 let cb = app.sort.callback ? app.sort.callback : ( val )=> {
@@ -195,10 +193,15 @@ function appemdOrUpdate( options, res, models ) {
                     let msg = 'Sorry a-b=NaN, callback needs to return number a=' + a + ' b=' + b;
                     throw msg
                 }
+
                 return val * (a - b);
 
             } );
+
         }
+
+
+
 
     } );
 

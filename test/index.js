@@ -38,42 +38,42 @@ lab.experiment('waterline', function () {
         }, 50);
     });
 
-    lab.test('createOrUpdate', function (done) {
-        let data=[];
-
-        for (let i=0; i<20;i++){
-            data.push({test: new Date(_key_date.valueOf()+i*3600),
-                dummy:'hej'})
-        }
-        let Model=server.getModel('test');
-        let options={
-            nojson:true,
-            keys:['test'],
-            results: data
-        };
-
-        debug(options)
-
-        Model.createOrUpdate(options, function(err, models){
-
-            if(err){
-                debug(err)
-            }
-
-            debug(JSON.stringify(models, null,4))
-
-            for (let i=0;i<10;i++){
-                Code.expect(models[i].createdAt.toJSON()==models[i].updatedAt.toJSON()).to.be.false();
-                Code.expect('hej'==models[i].dummy).to.be.true();
-
-            }
-            for (let i=10;i<20;i++){
-                Code.expect(models[i].createdAt.toJSON()==models[i].updatedAt.toJSON()).to.be.true();
-                Code.expect('hej'==models[i].dummy).to.be.true();
-            }
-            done()
-        })
-    });
+    // lab.test('createOrUpdate', function (done) {
+    //     let data=[];
+    //
+    //     for (let i=0; i<20;i++){
+    //         data.push({test: new Date(_key_date.valueOf()+i*3600),
+    //             dummy:'hej'})
+    //     }
+    //     let Model=server.getModel('test');
+    //     let options={
+    //         nojson:true,
+    //         keys:['test'],
+    //         results: data
+    //     };
+    //
+    //     debug(options)
+    //
+    //     Model.createOrUpdate(options, function(err, models){
+    //
+    //         if(err){
+    //             debug(err)
+    //         }
+    //
+    //         debug(JSON.stringify(models, null,4))
+    //
+    //         for (let i=0;i<10;i++){
+    //             Code.expect(models[i].createdAt.toJSON()==models[i].updatedAt.toJSON()).to.be.false();
+    //             Code.expect('hej'==models[i].dummy).to.be.true();
+    //
+    //         }
+    //         for (let i=10;i<20;i++){
+    //             Code.expect(models[i].createdAt.toJSON()==models[i].updatedAt.toJSON()).to.be.true();
+    //             Code.expect('hej'==models[i].dummy).to.be.true();
+    //         }
+    //         done()
+    //     })
+    // });
 
     lab.test('createOrUpdate append, sort and unique', function (done) {
 
@@ -149,13 +149,16 @@ lab.experiment('waterline', function () {
 
             Model.createOrUpdate(options, function(err, models) {
 
+
+                debug('models', models)
+
                 models.forEach((model)=>{
 
-                    debug(model)
+                    debug('hej!!!',model)
 
                     Code.expect(model.createdAt.toJSON()==model.updatedAt.toJSON()).to.be.false();
-                    Code.expect(Number(model.dummy2[0])>Number(model.dummy2[1])).to.be.true();
-                    Code.expect(model.dummy3[0].id>model.dummy3[1].id).to.be.true();
+                    Code.expect(Number(model.dummy2[0])<Number(model.dummy2[1])).to.be.true();
+                    Code.expect(model.dummy3[0].id<model.dummy3[1].id).to.be.true();
                 });
 
                 options.results=data3;
@@ -192,66 +195,66 @@ lab.experiment('waterline', function () {
         })
     });
 
-
-    lab.test('createOrUpdate append with or on key', function (done) {
-
-        let data1=[];
-        let data2=[];
-
-
-        for (let i=0; i<2;i++){
-
-            let date=i==0 ? 'date1' : 'date2';
-
-            data1.push({
-                test: new Date(_key_date.valueOf()+i*3600),
-                dummy3: [{id:i, [date]: new Date()}],
-            });
-            data2.push({
-                test:new Date(_key_date.valueOf()+i*3600),
-                dummy3:[{id:i, [date]:new Date(new Date().valueOf()+2000)}],
-            });
-
-            // data3.push({
-            //     test:new Date(_key_date.valueOf()+i*3600),
-            //     dummy3:[{[id]:i+1, date:new Date(new Date().valueOf()+3600*4*1000)},{id:i-2, date:new Date(new Date().valueOf()+3600*4*1000)}],
-            // })
-        }
-
-        let Model=server.getModel('test');
-
-        let options={
-            keys:['test'],
-            results: data1
-        };
-        Model.createOrUpdate(options, function(err, models){
-
-            let options={
-                keys:['test'],
-                results: data2,
-                append_or_update:[
-                    {
-                        key:'dummy3',
-                        unique:{
-                            key:{or:['date1', 'date2']},
-                            type:'datetime'},
-                    }
-                ]
-            };
-
-            Model.createOrUpdate(options, function(err, models) {
-
-                if(err) console.error(err)
-
-                debug(models, models[0].dummy3[0].date1, data2[0].dummy3[0].date1)
-                Code.expect(models[0].dummy3[0].date1.valueOf()==data2[0].dummy3[0].date1.valueOf()).to.be.true();
-                Code.expect(models[0].dummy3[0].id==data2[0].dummy3[0].id).to.be.true();
-                Code.expect(models[1].dummy3[0].date2.valueOf()==data2[1].dummy3[0].date2.valueOf()).to.be.true();
-
-                done()
-
-            })
-        })
-    });
+    //
+    // lab.test('createOrUpdate append with or on key', function (done) {
+    //
+    //     let data1=[];
+    //     let data2=[];
+    //
+    //
+    //     for (let i=0; i<2;i++){
+    //
+    //         let date=i==0 ? 'date1' : 'date2';
+    //
+    //         data1.push({
+    //             test: new Date(_key_date.valueOf()+i*3600),
+    //             dummy3: [{id:i, [date]: new Date()}],
+    //         });
+    //         data2.push({
+    //             test:new Date(_key_date.valueOf()+i*3600),
+    //             dummy3:[{id:i, [date]:new Date(new Date().valueOf()+2000)}],
+    //         });
+    //
+    //         // data3.push({
+    //         //     test:new Date(_key_date.valueOf()+i*3600),
+    //         //     dummy3:[{[id]:i+1, date:new Date(new Date().valueOf()+3600*4*1000)},{id:i-2, date:new Date(new Date().valueOf()+3600*4*1000)}],
+    //         // })
+    //     }
+    //
+    //     let Model=server.getModel('test');
+    //
+    //     let options={
+    //         keys:['test'],
+    //         results: data1
+    //     };
+    //     Model.createOrUpdate(options, function(err, models){
+    //
+    //         let options={
+    //             keys:['test'],
+    //             results: data2,
+    //             append_or_update:[
+    //                 {
+    //                     key:'dummy3',
+    //                     unique:{
+    //                         key:{or:['date1', 'date2']},
+    //                         type:'datetime'},
+    //                 }
+    //             ]
+    //         };
+    //
+    //         Model.createOrUpdate(options, function(err, models) {
+    //
+    //             if(err) console.error(err)
+    //
+    //             debug(models, models[0].dummy3[0].date1, data2[0].dummy3[0].date1)
+    //             Code.expect(models[0].dummy3[0].date1.valueOf()==data2[0].dummy3[0].date1.valueOf()).to.be.true();
+    //             Code.expect(models[0].dummy3[0].id==data2[0].dummy3[0].id).to.be.true();
+    //             Code.expect(models[1].dummy3[0].date2.valueOf()==data2[1].dummy3[0].date2.valueOf()).to.be.true();
+    //
+    //             done()
+    //
+    //         })
+    //     })
+    // });
 
 });
