@@ -124,9 +124,14 @@ function appemdOrUpdate( options, res, models ) {
                         }
                 }
 
+                cmp=app.unique.type=='datetime'
+                    ? new Date(cmp)
+                    : cmp
+
                 debug('callback', callback);
                 debug('cmp', cmp);
                 debug('cmp with', models[0][app.key].map( callback ))
+
 
                 // do not add if it exist
                 let pos = models[0][app.key].map( callback ).indexOf( cmp );
