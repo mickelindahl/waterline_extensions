@@ -96,9 +96,11 @@ function appemdOrUpdate( options, res, models ) {
                         callback = ( e )=> {
                             return app.unique.type=='datetime'
                                 ? new Date(e[app.unique.key])
-                                : e[app.unique.key]
+                                : e[app.unique.key].valueOf()
                         };
-                        cmp = val[app.unique.key];
+                        cmp = app.unique.type=='datetime'
+                            ? new Date(val[app.unique.key])
+                            : val[app.unique.key].valueOf();
                         break;
 
                     case 'object':
@@ -134,7 +136,7 @@ function appemdOrUpdate( options, res, models ) {
 
 
                 // do not add if it exist
-                let pos = models[0][app.key].map( callback ).indexOf( cmp );
+                let pos = models[0][app.key].map( callback ).indexOf(cmp );
 
                 debug('pos', pos)
 
