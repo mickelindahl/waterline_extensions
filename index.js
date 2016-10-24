@@ -20,7 +20,7 @@ function _createOrUpdate( options, res ) {
         options.model.find( criteria ).exec( function ( err, models ) {
 
             if ( err ) {
-                return _callback( err );
+                return reject( err );
             }
             if ( models.length == 0 ) {
 
