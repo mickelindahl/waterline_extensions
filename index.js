@@ -36,6 +36,7 @@ function _createOrUpdate( options, res ) {
 
                 if ( models.length != 1 ) {
                     debug( 'More than one model exit for that key, now allowed!' );
+                    debug('models:', JSON.stringify(models));
                     return reject( 'More than one model exit for that key, now allowed!' )
                 }
 
