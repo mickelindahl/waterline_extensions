@@ -216,7 +216,7 @@ function createOrUpdate( options, done ) {
 
     var current = Promise.resolve();
 
-    return Promise.all( options.results.map( ( res )=> {
+    let p= Promise.all( options.results.map( ( res )=> {
         current = current.then( function () {
 
             return _createOrUpdate( options, res )
@@ -242,6 +242,10 @@ function createOrUpdate( options, done ) {
         else throw err
 
     } );
+
+    debug(p)
+
+    return p
 
 }
 
