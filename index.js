@@ -120,7 +120,12 @@ function appemdOrUpdate( options, res, models ) {
                             cmp = val[app.unique.key.or[i]];
                             break;
 
-                        } else {
+                        } else if (app.unique.key.composed) {
+
+                            callback=app.unique.key.composed.callback;
+                            cmp = callback(val)
+
+                        }else {
                             throw 'Unknown operation on unique key'
                         }
                 }
