@@ -36,7 +36,7 @@ function _createOrUpdate( options, res ) {
 
                 if ( models.length != 1 ) {
                     debug( 'More than one model exit for that key, now allowed!' );
-                    debug('models:', JSON.stringify(models));
+                    models.forEach(m=>{JSON.stringify(models)})
                     return reject( 'More than one model exit for that key, now allowed!' )
                 }
 
@@ -140,24 +140,21 @@ function appemdOrUpdate( options, res, models ) {
                 debug('pos', pos)
 
                 if ( pos != -1 ) {
-                    if ( app.order ) {
 
-                        debug( 'app.update' );
+                    // update if value exists
+                    if ( app.unique.key ) {
+                        debug( 'update since unique key' );
+                        for ( let key in val ) {
 
-                        // update if value exists
-                        if ( app.unique.key ) {
+                            debug( models[0][app.key][pos][key] );
 
-                            for ( let key in val ) {
+                            models[0][app.key][pos][key] = (app.order && app.order.key == key)
+                                ? app.order.fun( val[key], models[0][app.key][pos][key] )
+                                : val[key]
 
-                                debug( models[0][app.key][pos][key] );
-
-                                models[0][app.key][pos][key] = (app.order && app.order.key == key)
-                                    ? app.order.fun( val[key], models[0][app.key][pos][key] )
-                                    : val[key]
-
-                            }
                         }
                     }
+                    // }
                     add = false;
                 }
             }
