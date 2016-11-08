@@ -77,10 +77,6 @@ function appemdOrUpdate( options, res, models, reject ) {
 
             if ( app.unique ) {
 
-                if ( typeof app.unique.key == 'object' ) {
-
-                }
-
                 let callback;
                 let cmp;
 
@@ -104,20 +100,13 @@ function appemdOrUpdate( options, res, models, reject ) {
                         cmp =  callback(val);
                         break;
 
-                    case 'object':
+                    case 'function':
 
-                        debug('it is a object');
+                        debug('it is a function');
+                        callback=app.unique.key;
+                        cmp = callback(val);
 
-                        // compose several keys into one unique key
-                        if (app.unique.key.composed) {
 
-                            callback=app.unique.key.composed;
-                            cmp = callback(val);
-
-                        }else {
-                            debug(reject)
-                            return reject('Unknown operation on unique key')
-                        }
                 }
 
                 debug('callback', callback);

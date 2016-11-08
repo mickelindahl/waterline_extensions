@@ -266,42 +266,6 @@ lab.experiment('waterline', function () {
         })
     });
 
-    lab.test('createOrUpdate unknown operation on unique key', function (done) {
-
-        let data1=[];
-
-
-        for (let i=0; i<2;i++){
-            data1.push({
-                test: new Date(_key_date.valueOf()+i*3600),
-                dummy2: ['5'],
-                dummy3: [{id:i-2, date: new Date()}],
-            });
-        }
-
-        let Model=server.getModel('test');
-
-        let options= {
-            keys: ['test'],
-            results: data1,
-            append_or_update: [
-                {
-                    key: 'dummy2',
-                    unique:{
-                        key:{bad:['date1', 'date2']},
-                        type:'datetime'},
-                }]
-
-        };
-        Model.createOrUpdate(options).then( models=> {
-
-        }).catch(err=>{
-
-            Code.expect(err).to.equal('Unknown operation on unique key')
-
-            done()
-        })
-    });
 
     lab.test('createOrUpdate unique type string with datetime', function (done) {
 
@@ -352,7 +316,7 @@ lab.experiment('waterline', function () {
 
     });
 
-    lab.test('createOrUpdate append with compose key', function (done) {
+    lab.test('createOrUpdate append with function key', function (done) {
 
         let data1=[];
         let data2=[];
@@ -389,12 +353,7 @@ lab.experiment('waterline', function () {
                     {
                         key:'dummy3',
                         unique:{
-                            key:{
-                                composed:(e)=>{
-                                    return e['id']+e['date1'].valueOf()
-                                }
-
-                            },
+                            key:(e)=>{ return e['id']+e['date1'].valueOf()},
                             type:'datetime'},
                     }
                 ]
