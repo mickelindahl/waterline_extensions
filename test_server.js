@@ -36,36 +36,9 @@ server.register([    {
         options: config
     }]
     , function (err) {
-        if (err) {
-            server.app.log.error('Error when loading plugins', err);
-        } else {
 
-            // Add the route
-            server.route({
-                method: 'GET',
-                path:'/hello',
-                handler: function (request, reply) {
+        server.app.readyForTest = true;
 
-                    return reply('hello world');
-                }
-            });
-
-            // Plugins loaded. Set up the rest and get kickin'
-            // Vision enables server.views function
-
-            // Start the server if not running under test (required by other module)
-            if (!module.parent) {
-                server.start(function () {
-                    console.log('Server running at:', server.info.uri);
-
-                });
-            } else {
-                // Running from test, don't start server
-                server.app.readyForTest = true;
-            }
-
-
-        }
     });
 
 module.exports = server;

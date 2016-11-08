@@ -6,7 +6,7 @@ const we=require('../index');
 
 module.exports = {
 
-    identity: 'test',
+    identity: 'test2',
 
     attributes: {
         test_id:'integer',

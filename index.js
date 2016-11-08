@@ -17,21 +17,19 @@ function _createOrUpdate( options, res ) {
 
         debug( 'Criteria', criteria );
 
-        options.model.find( criteria ).exec( function ( err, models ) {
+        options.model.find( criteria ).then(models => {
 
-            if ( err ) {
-                return reject( err );
-            }
+            let promise;
+
             if ( models.length == 0 ) {
 
                 debug( '\x1b[0;31mModel not found creating\x1b[0;37m' );
 
-                options.model.create( res ).exec( function ( err, model ) {
-                    if ( err ) {
-                        return reject( err )
-                    }
+                promise=options.model.create( res ).then(model =>{
+
                     resolve( model )
-                } );
+
+                } )
             } else {
 
                 if ( models.length != 1 ) {
@@ -44,32 +42,38 @@ function _createOrUpdate( options, res ) {
 
                 // Push values to arrays or append to value if it exists in the array
                 if ( options.append_or_update ) {
-                    res = appemdOrUpdate( options, res, models )
+                    res = appemdOrUpdate( options, res, models, reject )
                     // debug('updating',res)
                 }
 
-                options.model.update( criteria, res ).exec( function ( err, model ) {
+                promise=options.model.update( criteria, res ).then( model => {
                     debug('createdAt',model[0].createdAt)
                     debug('updatedAt', model[0].updatedAt)
 
-                    if ( err ) {
-                        console.error( err );
-                        return reject( err );
-                    }
                     resolve( model[0] )
+
                 } );
             }
+            // Attached catch
+            promise.catch(err=>{
+
+                return reject( err );
+
+            });
+
         } )
     } )
 }
 
-function appemdOrUpdate( options, res, models ) {
+function appemdOrUpdate( options, res, models, reject ) {
 
     options.append_or_update.forEach( ( app )=> {
 
         res[app.key].forEach( ( val )=> {
 
             let add = true;
+
+            debug(app.unique)
 
             if ( app.unique ) {
 
@@ -79,8 +83,6 @@ function appemdOrUpdate( options, res, models ) {
 
                 let callback;
                 let cmp;
-
-                debug(typeof app.unique.key)
 
                 switch ( typeof app.unique.key ) {
 
@@ -104,38 +106,22 @@ function appemdOrUpdate( options, res, models ) {
 
                     case 'object':
 
-                        debug('object');
+                        debug('it is a object');
 
-                        if ( app.unique.key.or ) {
+                        // compose several keys into one unique key
+                        if (app.unique.key.composed) {
 
-                            let i = val[app.unique.key.or[0]] ? 0 : 1;
-                            callback = ( e )=> {
-                                debug('callback '+i, app.unique.type=='datetime'
-                                    ? (new Date(e[app.unique.key.or[i]])).valueOf()
-                                    : e[app.unique.key.or[0]]);
-                                return app.unique.type=='datetime'
-                                    ? (new Date(e[app.unique.key.or[i]])).valueOf()
-                                    : e[app.unique.key.or[0]]
-                            };
-                            cmp = val[app.unique.key.or[i]];
-                            break;
-
-                        } else if (app.unique.key.composed) {
-
-                            callback=app.unique.key.composed.callback;
-                            cmp = callback(val)
+                            callback=app.unique.key.composed;
+                            cmp = callback(val);
 
                         }else {
-                            throw 'Unknown operation on unique key'
+                            debug(reject)
+                            return reject('Unknown operation on unique key')
                         }
                 }
 
-                // cmp=app.unique.type=='datetime'
-                //     ? new Date(cmp)
-                //     : cmp
-
                 debug('callback', callback);
-                debug('cmp', cmp);
+                debug('cmp', cmp, app.key, models);
                 debug('cmp with', models[0][app.key].map( callback ))
 
 
@@ -177,34 +163,46 @@ function appemdOrUpdate( options, res, models ) {
 
             // sort on each post by time
             res[app.key].sort( ( a, b )=> {
+
                 let val;
-                if ( app.sort.order = 'ascending' ) {
-                    val = -1;
-                }
-                if ( app.sort.order = 'descending' ) {
+
+                if ( app.sort.order == 'ascending' ) {
+                    debug('ascending', app.sort.order)
                     val = 1;
                 }
 
-                let cb = app.sort.callback ? app.sort.callback : ( val )=> {
-                    return val
-                };
-
-                a = app.sort.key ? cb( a[app.sort.key] ) : cb( a );
-                b = app.sort.key ? cb( b[app.sort.key] ) : cb( b );
-
-                if ( (a - b) == NaN ) {
-                    let msg = 'Sorry a-b=NaN, callback needs to return number a=' + a + ' b=' + b;
-                    throw msg
+                if ( app.sort.order == 'descending' ) {
+                    debug('descending', app.sort.order)
+                    val = -1;
                 }
 
-                return val * (a - b);
+                if ( a < b )
+                    return -1*val;
+                if ( a > b )
+                    return 1*val;
+                return 0;
+
+
+
+                // let cb = app.sort.callback ? app.sort.callback : ( val )=> {
+                //     return val
+                // };
+
+                // a = app.sort.key ? cb( a[app.sort.key] ) : cb( a );
+                // b = app.sort.key ? cb( b[app.sort.key] ) : cb( b );
+                //
+                // if ( (a - b) == NaN ) {
+                //     let msg = 'Sorry a-b=NaN, callback needs to return number a=' + a + ' b=' + b;
+                //     throw msg
+                // }
+                //
+                // debug('val * (a - b)', val,val * (a - b), a, b)
+                //
+                // return val * (a - b);
 
             } );
-
+            debug('sort res',res)
         }
-
-
-
 
     } );
 
