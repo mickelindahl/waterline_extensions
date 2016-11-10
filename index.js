@@ -25,6 +25,20 @@ function _createOrUpdate( options, res ) {
 
                 debug( '\x1b[0;31mModel not found creating\x1b[0;37m' );
 
+                // If append or update options and sort elements
+                if ( options.append_or_update ) {
+
+                    options.append_or_update.forEach(app=>{
+
+                        if ( app.sort ) {
+
+                            debug('sorting elements')
+                            res[app.key] = sortElements( res[app.key], app.sort.order, app.sort.key )
+
+                        }
+                    })
+                }
+
                 promise=options.model.create( res ).then(model =>{
 
                     resolve( model )
@@ -34,7 +48,7 @@ function _createOrUpdate( options, res ) {
 
                 if ( models.length != 1 ) {
                     debug( 'More than one model exit for that key, now allowed!' );
-                    models.forEach(m=>{JSON.stringify(models)})
+                    models.forEach(m=>{JSON.stringify(models)});
                     return reject( 'More than one model exit for that key, now allowed!' )
                 }
 
@@ -65,57 +79,99 @@ function _createOrUpdate( options, res ) {
     } )
 }
 
+function elementOperation(key){
+
+    let callback;
+
+    switch ( typeof key ) {
+
+        case "undefined":
+            callback = ( e )=> {return e};
+            break;
+
+        case 'string':
+
+            callback = ( e )=> { e[key]};
+            break;
+
+        case 'function':
+
+            debug('it is a function');
+            callback=key;
+            break
+    }
+
+    return callback
+
+}
+
+function sortElements(elements, order, key){
+
+    debug('sorting order', order, 'key', key)
+
+    let callback=elementOperation(key);;
+    let cmp;
+
+    // sort on each post by time
+    elements.sort( ( a, b )=> {
+
+        a=callback(a)
+        b=callback(b)
+
+        let val;
+
+        if ( order == 'ascending' ) {
+            debug('ascending', order)
+            val = 1;
+        }
+
+        if ( order == 'descending' ) {
+            debug('descending', order)
+            val = -1;
+        }
+
+        if ( a < b )
+            return -1*val;
+        if ( a > b )
+            return 1*val;
+        return 0;
+
+    } );
+
+    return elements
+
+}
+
 function appemdOrUpdate( options, res, models, reject ) {
 
     options.append_or_update.forEach( ( app )=> {
 
+        // Add to element if exist else just add element
         res[app.key].forEach( ( val )=> {
 
             let add = true;
 
             debug(app.unique)
 
+            // If it yet does not exist
+            if (!models[0][app.key]){
+
+                models[0][app.key]=[val]
+
+            }
+
+
             if ( app.unique ) {
 
-                let callback;
-                let cmp;
-
-                switch ( typeof app.unique.key ) {
-
-                    case "undefined":
-
-                      callback = ( e )=> {
-                            return e
-                        };
-                        cmp = val;
-                        break;
-
-                    case 'string':
-
-                        callback = ( e )=> {
-                            return app.unique.type=='datetime'
-                                ? new Date(e[app.unique.key]).valueOf()
-                                : e[app.unique.key]
-                        };
-                        cmp =  callback(val);
-                        break;
-
-                    case 'function':
-
-                        debug('it is a function');
-                        callback=app.unique.key;
-                        cmp = callback(val);
-
-
-                }
+                let callback=elementOperation(app.unique.key);
 
                 debug('callback', callback);
-                debug('cmp', cmp, app.key, models);
+                debug('cmp', callback(val) , app.key, models);
+                debug(app)
                 debug('cmp with', models[0][app.key].map( callback ))
 
-
                 // do not add if it exist
-                let pos = models[0][app.key].map( callback ).indexOf(cmp );
+                let pos = models[0][app.key].map( callback ).indexOf(callback(val)  );
 
                 debug('pos', pos)
 
@@ -126,11 +182,7 @@ function appemdOrUpdate( options, res, models, reject ) {
                         debug( 'update since unique key' );
                         for ( let key in val ) {
 
-                            debug( models[0][app.key][pos][key] );
-
-                            models[0][app.key][pos][key] = (app.order && app.order.key == key)
-                                ? app.order.fun( val[key], models[0][app.key][pos][key] )
-                                : val[key]
+                            models[0][app.key][pos][key] =  val[key]
 
                         }
                     }
@@ -146,51 +198,11 @@ function appemdOrUpdate( options, res, models, reject ) {
         } );
         res[app.key] = models[0][app.key];
 
+        // Sort elements
         if ( app.sort ) {
 
-            debug('sorting order', app.sort.order, 'callback', app.sort.callback )
+            res[app.key]=sortElements(res[app.key], app.sort.order , app.sort.key)
 
-            // sort on each post by time
-            res[app.key].sort( ( a, b )=> {
-
-                let val;
-
-                if ( app.sort.order == 'ascending' ) {
-                    debug('ascending', app.sort.order)
-                    val = 1;
-                }
-
-                if ( app.sort.order == 'descending' ) {
-                    debug('descending', app.sort.order)
-                    val = -1;
-                }
-
-                if ( a < b )
-                    return -1*val;
-                if ( a > b )
-                    return 1*val;
-                return 0;
-
-
-
-                // let cb = app.sort.callback ? app.sort.callback : ( val )=> {
-                //     return val
-                // };
-
-                // a = app.sort.key ? cb( a[app.sort.key] ) : cb( a );
-                // b = app.sort.key ? cb( b[app.sort.key] ) : cb( b );
-                //
-                // if ( (a - b) == NaN ) {
-                //     let msg = 'Sorry a-b=NaN, callback needs to return number a=' + a + ' b=' + b;
-                //     throw msg
-                // }
-                //
-                // debug('val * (a - b)', val,val * (a - b), a, b)
-                //
-                // return val * (a - b);
-
-            } );
-            debug('sort res',res)
         }
 
     } );

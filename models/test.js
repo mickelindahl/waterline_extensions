@@ -13,7 +13,8 @@ module.exports = {
         test: 'datetime',
         dummy: 'string',
         dummy2:'json',
-        dummy3:'json'
+        dummy3:'json',
+        dummy4:'json'
     },
 
     createOrUpdate:function(options, callback){

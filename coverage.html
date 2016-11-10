@@ -563,7 +563,7 @@
           <div class="failures">0</div>
           <div class="skipped">0</div>
           <div class="test-count">9</div>
-          <div class="duration">425</div>
+          <div class="duration">422</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success"><label for="show-success">Show Success</label></input>
@@ -582,59 +582,59 @@
           <tbody>
           <tr class="show waterline success">
               <td class="test-id">1</td>
-              <td class="test-title">waterline createOrUpdate
+              <td class="test-title">waterline createOrUpdate with and without sort on elements
                   
               </td>
-              <td class="test-duration">163</td>
+              <td class="test-duration">181</td>
           </tr>
           <tr class="show waterline success">
               <td class="test-id">2</td>
               <td class="test-title">waterline createOrUpdate append, sort and unique
                   
               </td>
-              <td class="test-duration">59</td>
+              <td class="test-duration">44</td>
           </tr>
           <tr class="show waterline success">
               <td class="test-id">3</td>
               <td class="test-title">waterline createOrUpdate sort without callback
                   
               </td>
-              <td class="test-duration">18</td>
+              <td class="test-duration">12</td>
           </tr>
           <tr class="show waterline success">
               <td class="test-id">4</td>
               <td class="test-title">waterline createOrUpdate not unique
                   
               </td>
-              <td class="test-duration">14</td>
+              <td class="test-duration">8</td>
           </tr>
           <tr class="show waterline success">
               <td class="test-id">5</td>
               <td class="test-title">waterline createOrUpdate unique type string with datetime
                   
               </td>
-              <td class="test-duration">16</td>
+              <td class="test-duration">13</td>
           </tr>
           <tr class="show waterline success">
               <td class="test-id">6</td>
               <td class="test-title">waterline createOrUpdate append with function key
                   
               </td>
-              <td class="test-duration">38</td>
+              <td class="test-duration">35</td>
           </tr>
           <tr class="show waterline success">
               <td class="test-id">7</td>
               <td class="test-title">waterline createOrUpdate multiple models for same search criteria in db error
                   
               </td>
-              <td class="test-duration">9</td>
+              <td class="test-duration">10</td>
           </tr>
           <tr class="show waterline success">
               <td class="test-id">8</td>
               <td class="test-title">waterline createOrUpdate thrwo error
                   
               </td>
-              <td class="test-duration">6</td>
+              <td class="test-duration">5</td>
           </tr>
           <tr class="show waterline success">
               <td class="test-id">9</td>
@@ -650,8 +650,8 @@
         <h1>Code Coverage Report</h1>
         <div class="stats high">
             <div class="percentage">100%</div>
-            <div class="sloc">240</div>
-            <div class="hits">240</div>
+            <div class="sloc">241</div>
+            <div class="hits">241</div>
             <div class="misses">0</div>
         </div>
         <div id="files">
@@ -736,7 +736,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>11</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>43</td>
+                            <td class="hits" data-tooltip>48</td>
                             <td class="source">    return new Promise( ( resolve, reject )&#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
@@ -754,7 +754,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>14</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>43</td>
+                            <td class="hits" data-tooltip>48</td>
                             <td class="source">        options.keys.forEach( ( key )&#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
@@ -778,7 +778,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>18</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>43</td>
+                            <td class="hits" data-tooltip>48</td>
                             <td class="source">        debug( &#x27;Criteria&#x27;, criteria );</td>
                         </tr>
                         <tr class="hit">
@@ -790,7 +790,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>20</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>43</td>
+                            <td class="hits" data-tooltip>48</td>
                             <td class="source">        options.model.find( criteria ).then(models &#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
@@ -814,7 +814,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>24</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>43</td>
+                            <td class="hits" data-tooltip>48</td>
                             <td class="source">            if ( models.length &#x3D;&#x3D; 0 ) {</td>
                         </tr>
                         <tr class="hit">
@@ -826,7 +826,7 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>26</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>12</td>
+                            <td class="hits" data-tooltip>17</td>
                             <td class="source">                debug( &#x27;\x1b[0;31mModel not found creating\x1b[0;37m&#x27; );</td>
                         </tr>
                         <tr class="hit">
@@ -838,38 +838,38 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>28</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>12</td>
-                            <td class="source">                promise&#x3D;options.model.create( res ).then(model &#x3D;&gt;{</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">                // If append or update options and sort elements</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>29</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>17</td>
+                            <td class="source">                if ( options.append_or_update ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>30</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                    resolve( model )</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>31</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>15</td>
+                            <td class="source">                    options.append_or_update.forEach(app&#x3D;&gt;{</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>32</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                } )</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>33</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            } else {</td>
+                            <td class="source">                        if ( app.sort ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>34</td>
@@ -880,80 +880,80 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>35</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>31</td>
-                            <td class="source">                if ( models.length !&#x3D; 1 ) {</td>
+                            <td class="hits" data-tooltip>10</td>
+                            <td class="source">                            debug(&#x27;sorting elements&#x27;)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>36</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
-                            <td class="source">                    debug( &#x27;More than one model exit for that key, now allowed!&#x27; );</td>
+                            <td class="hits" data-tooltip>10</td>
+                            <td class="source">                            res[app.key] &#x3D; sortElements( res[app.key], app.sort.order, app.sort.key )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>37</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
-                            <td class="source">                    models.forEach(m&#x3D;&gt;{JSON.stringify(models)})</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>38</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
-                            <td class="source">                    return reject( &#x27;More than one model exit for that key, now allowed!&#x27; )</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">                        }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>39</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                }</td>
+                            <td class="source">                    })</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>40</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">                }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>41</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>30</td>
-                            <td class="source">                debug( &#x27;\x1b[0;33mModel found updating\x1b[0;37m&#x27; );</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>42</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>17</td>
+                            <td class="source">                promise&#x3D;options.model.create( res ).then(model &#x3D;&gt;{</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>43</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                // Push values to arrays or append to value if it exists in the array</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>44</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>30</td>
-                            <td class="source">                if ( options.append_or_update ) {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">                    resolve( model )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>45</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>16</td>
-                            <td class="source">                    res &#x3D; appemdOrUpdate( options, res, models, reject )</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>46</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                    // debug(&#x27;updating&#x27;,res)</td>
+                            <td class="source">                } )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>47</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                }</td>
+                            <td class="source">            } else {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>48</td>
@@ -964,32 +964,32 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>49</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>30</td>
-                            <td class="source">                promise&#x3D;options.model.update( criteria, res ).then( model &#x3D;&gt; {</td>
+                            <td class="hits" data-tooltip>31</td>
+                            <td class="source">                if ( models.length !&#x3D; 1 ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>50</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                    debug(&#x27;createdAt&#x27;,model[0].createdAt)</td>
+                            <td class="hits" data-tooltip>1</td>
+                            <td class="source">                    debug( &#x27;More than one model exit for that key, now allowed!&#x27; );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>51</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>30</td>
-                            <td class="source">                    debug(&#x27;updatedAt&#x27;, model[0].updatedAt)</td>
+                            <td class="hits" data-tooltip>1</td>
+                            <td class="source">                    models.forEach(m&#x3D;&gt;{JSON.stringify(models)});</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>52</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>1</td>
+                            <td class="source">                    return reject( &#x27;More than one model exit for that key, now allowed!&#x27; )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>53</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>30</td>
-                            <td class="source">                    resolve( model[0] )</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">                }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>54</td>
@@ -1000,110 +1000,110 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>55</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                } );</td>
+                            <td class="hits" data-tooltip>30</td>
+                            <td class="source">                debug( &#x27;\x1b[0;33mModel found updating\x1b[0;37m&#x27; );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>56</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            }</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>57</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            // Attached catch</td>
+                            <td class="source">                // Push values to arrays or append to value if it exists in the array</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>58</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>42</td>
-                            <td class="source">            promise.catch(err&#x3D;&gt;{</td>
+                            <td class="hits" data-tooltip>30</td>
+                            <td class="source">                if ( options.append_or_update ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>59</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>28</td>
+                            <td class="source">                    res &#x3D; appemdOrUpdate( options, res, models, reject )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>60</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                return reject( err );</td>
+                            <td class="source">                    // debug(&#x27;updating&#x27;,res)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>61</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">                }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>62</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            });</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>63</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>30</td>
+                            <td class="source">                promise&#x3D;options.model.update( criteria, res ).then( model &#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>64</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">        } )</td>
+                            <td class="source">                    debug(&#x27;createdAt&#x27;,model[0].createdAt)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>65</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">    } )</td>
+                            <td class="hits" data-tooltip>30</td>
+                            <td class="source">                    debug(&#x27;updatedAt&#x27;, model[0].updatedAt)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>66</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">}</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>67</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>30</td>
+                            <td class="source">                    resolve( model[0] )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>68</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">function appemdOrUpdate( options, res, models, reject ) {</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>69</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">                } );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>70</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>16</td>
-                            <td class="source">    options.append_or_update.forEach( ( app )&#x3D;&gt; {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">            }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>71</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">            // Attached catch</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>72</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">        res[app.key].forEach( ( val )&#x3D;&gt; {</td>
+                            <td class="hits" data-tooltip>47</td>
+                            <td class="source">            promise.catch(err&#x3D;&gt;{</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>73</td>
@@ -1115,7 +1115,7 @@
                             <td class="line" data-tooltip>74</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            let add &#x3D; true;</td>
+                            <td class="source">                return reject( err );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>75</td>
@@ -1126,8 +1126,8 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>76</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>26</td>
-                            <td class="source">            debug(app.unique)</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">            });</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>77</td>
@@ -1138,188 +1138,188 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>78</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>26</td>
-                            <td class="source">            if ( app.unique ) {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        } )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>79</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                </td>
+                            <td class="source">    } )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>80</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>24</td>
-                            <td class="source">                let callback;</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">}</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>81</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>24</td>
-                            <td class="source">                let cmp;</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>82</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">function elementOperation(key){</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>83</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>24</td>
-                            <td class="source">                switch ( typeof app.unique.key ) {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>84</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>92</td>
+                            <td class="source">    let callback;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>85</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                    case &quot;undefined&quot;:</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>86</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>92</td>
+                            <td class="source">    switch ( typeof key ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>87</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
-                            <td class="source">                      callback &#x3D; ( e )&#x3D;&gt; {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>88</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                            return e</td>
+                            <td class="source">        case &quot;undefined&quot;:</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>89</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                        };</td>
+                            <td class="hits" data-tooltip>70</td>
+                            <td class="source">            callback &#x3D; ( e )&#x3D;&gt; {return e};</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>90</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
-                            <td class="source">                        cmp &#x3D; val;</td>
+                            <td class="hits" data-tooltip>70</td>
+                            <td class="source">            break;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>91</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
-                            <td class="source">                        break;</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>92</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">        case &#x27;string&#x27;:</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>93</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                    case &#x27;string&#x27;:</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>94</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>10</td>
+                            <td class="source">            callback &#x3D; ( e )&#x3D;&gt; { e[key]};</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>95</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip>10</td>
-                            <td class="source">                        callback &#x3D; ( e )&#x3D;&gt; {</td>
+                            <td class="source">            break;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>96</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                            return app.unique.type&#x3D;&#x3D;&#x27;datetime&#x27;</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>97</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                                ? new Date(e[app.unique.key]).valueOf()</td>
+                            <td class="source">        case &#x27;function&#x27;:</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>98</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                                : e[app.unique.key]</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>99</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                        };</td>
+                            <td class="hits" data-tooltip>12</td>
+                            <td class="source">            debug(&#x27;it is a function&#x27;);</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>100</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
-                            <td class="source">                        cmp &#x3D;  callback(val);</td>
+                            <td class="hits" data-tooltip>12</td>
+                            <td class="source">            callback&#x3D;key;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>101</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
-                            <td class="source">                        break;</td>
+                            <td class="hits" data-tooltip>12</td>
+                            <td class="source">            break</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>102</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">    }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>103</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                    case &#x27;function&#x27;:</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>104</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>92</td>
+                            <td class="source">    return callback</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>105</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source"></td>
                         </tr>
                         <tr class="hit">
-                            <td class="line" data-tooltip>105</td>
-                            <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>4</td>
-                            <td class="source">                        debug(&#x27;it is a function&#x27;);</td>
-                        </tr>
-                        <tr class="hit">
                             <td class="line" data-tooltip>106</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>4</td>
-                            <td class="source">                        callback&#x3D;app.unique.key;</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">}</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>107</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>4</td>
-                            <td class="source">                        cmp &#x3D; callback(val);</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>108</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">function sortElements(elements, order, key){</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>109</td>
@@ -1330,8 +1330,8 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>110</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                }</td>
+                            <td class="hits" data-tooltip>36</td>
+                            <td class="source">    debug(&#x27;sorting order&#x27;, order, &#x27;key&#x27;, key)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>111</td>
@@ -1342,218 +1342,218 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>112</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>24</td>
-                            <td class="source">                debug(&#x27;callback&#x27;, callback);</td>
+                            <td class="hits" data-tooltip>36</td>
+                            <td class="source">    let callback&#x3D;elementOperation(key);;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>113</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>24</td>
-                            <td class="source">                debug(&#x27;cmp&#x27;, cmp, app.key, models);</td>
+                            <td class="hits" data-tooltip>36</td>
+                            <td class="source">    let cmp;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>114</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>24</td>
-                            <td class="source">                debug(&#x27;cmp with&#x27;, models[0][app.key].map( callback ))</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>115</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">    // sort on each post by time</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>116</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>36</td>
+                            <td class="source">    elements.sort( ( a, b )&#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>117</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                // do not add if it exist</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>118</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>24</td>
-                            <td class="source">                let pos &#x3D; models[0][app.key].map( callback ).indexOf(cmp );</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        a&#x3D;callback(a)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>119</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>78</td>
+                            <td class="source">        b&#x3D;callback(b)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>120</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>24</td>
-                            <td class="source">                debug(&#x27;pos&#x27;, pos)</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>121</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>78</td>
+                            <td class="source">        let val;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>122</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>24</td>
-                            <td class="source">                if ( pos !&#x3D; -1 ) {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>123</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>78</td>
+                            <td class="source">        if ( order &#x3D;&#x3D; &#x27;ascending&#x27; ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>124</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                    // update if value exists</td>
+                            <td class="hits" data-tooltip>72</td>
+                            <td class="source">            debug(&#x27;ascending&#x27;, order)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>125</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>14</td>
-                            <td class="source">                    if ( app.unique.key ) {</td>
+                            <td class="hits" data-tooltip>72</td>
+                            <td class="source">            val &#x3D; 1;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>126</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
-                            <td class="source">                        debug( &#x27;update since unique key&#x27; );</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>127</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>10</td>
-                            <td class="source">                        for ( let key in val ) {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>128</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>78</td>
+                            <td class="source">        if ( order &#x3D;&#x3D; &#x27;descending&#x27; ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>129</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>18</td>
-                            <td class="source">                            debug( models[0][app.key][pos][key] );</td>
+                            <td class="hits" data-tooltip>6</td>
+                            <td class="source">            debug(&#x27;descending&#x27;, order)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>130</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>6</td>
+                            <td class="source">            val &#x3D; -1;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>131</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>18</td>
-                            <td class="source">                            models[0][app.key][pos][key] &#x3D; (app.order &amp;&amp; app.order.key &#x3D;&#x3D; key)</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>132</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                                ? app.order.fun( val[key], models[0][app.key][pos][key] )</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>133</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                                : val[key]</td>
+                            <td class="hits" data-tooltip>78</td>
+                            <td class="source">        if ( a &lt; b )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>134</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>4</td>
+                            <td class="source">            return -1*val;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>135</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                        }</td>
+                            <td class="hits" data-tooltip>74</td>
+                            <td class="source">        if ( a &gt; b )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>136</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                    }</td>
+                            <td class="hits" data-tooltip>62</td>
+                            <td class="source">            return 1*val;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>137</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                    // }</td>
+                            <td class="hits" data-tooltip>12</td>
+                            <td class="source">        return 0;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>138</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>14</td>
-                            <td class="source">                    add &#x3D; false;</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>139</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                }</td>
+                            <td class="source">    } );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>140</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            }</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>141</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>36</td>
+                            <td class="source">    return elements</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>142</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source"></td>
                         </tr>
                         <tr class="hit">
-                            <td class="line" data-tooltip>142</td>
-                            <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>26</td>
-                            <td class="source">            if ( add ) {</td>
-                        </tr>
-                        <tr class="hit">
                             <td class="line" data-tooltip>143</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>12</td>
-                            <td class="source">                models[0][app.key].push( val )</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">}</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>144</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            }</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>145</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">function appemdOrUpdate( options, res, models, reject ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>146</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">        } );</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>147</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>22</td>
-                            <td class="source">        res[app.key] &#x3D; models[0][app.key];</td>
+                            <td class="hits" data-tooltip>28</td>
+                            <td class="source">    options.append_or_update.forEach( ( app )&#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>148</td>
@@ -1564,38 +1564,38 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>149</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>22</td>
-                            <td class="source">        if ( app.sort ) {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        // Add to element if exist else just add element</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>150</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">        res[app.key].forEach( ( val )&#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>151</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>14</td>
-                            <td class="source">            debug(&#x27;sorting order&#x27;, app.sort.order, &#x27;callback&#x27;, app.sort.callback )</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>152</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">            let add &#x3D; true;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>153</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            // sort on each post by time</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>154</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>14</td>
-                            <td class="source">            res[app.key].sort( ( a, b )&#x3D;&gt; {</td>
+                            <td class="hits" data-tooltip>58</td>
+                            <td class="source">            debug(app.unique)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>155</td>
@@ -1607,37 +1607,37 @@
                             <td class="line" data-tooltip>156</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                let val;</td>
+                            <td class="source">            // If it yet does not exist</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>157</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>58</td>
+                            <td class="source">            if (!models[0][app.key]){</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>158</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source"></td>
                         </tr>
                         <tr class="hit">
-                            <td class="line" data-tooltip>158</td>
-                            <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>18</td>
-                            <td class="source">                if ( app.sort.order &#x3D;&#x3D; &#x27;ascending&#x27; ) {</td>
-                        </tr>
-                        <tr class="hit">
                             <td class="line" data-tooltip>159</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip>12</td>
-                            <td class="source">                    debug(&#x27;ascending&#x27;, app.sort.order)</td>
+                            <td class="source">                models[0][app.key]&#x3D;[val]</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>160</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>12</td>
-                            <td class="source">                    val &#x3D; 1;</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>161</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                }</td>
+                            <td class="source">            }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>162</td>
@@ -1648,26 +1648,26 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>163</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>18</td>
-                            <td class="source">                if ( app.sort.order &#x3D;&#x3D; &#x27;descending&#x27; ) {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>164</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>6</td>
-                            <td class="source">                    debug(&#x27;descending&#x27;, app.sort.order)</td>
+                            <td class="hits" data-tooltip>58</td>
+                            <td class="source">            if ( app.unique ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>165</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>6</td>
-                            <td class="source">                    val &#x3D; -1;</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>166</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                }</td>
+                            <td class="hits" data-tooltip>56</td>
+                            <td class="source">                let callback&#x3D;elementOperation(app.unique.key);</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>167</td>
@@ -1678,44 +1678,44 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>168</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>18</td>
-                            <td class="source">                if ( a &lt; b )</td>
+                            <td class="hits" data-tooltip>56</td>
+                            <td class="source">                debug(&#x27;callback&#x27;, callback);</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>169</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>4</td>
-                            <td class="source">                    return -1*val;</td>
+                            <td class="hits" data-tooltip>56</td>
+                            <td class="source">                debug(&#x27;cmp&#x27;, callback(val) , app.key, models);</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>170</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>14</td>
-                            <td class="source">                if ( a &gt; b )</td>
+                            <td class="hits" data-tooltip>56</td>
+                            <td class="source">                debug(app)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>171</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>2</td>
-                            <td class="source">                    return 1*val;</td>
+                            <td class="hits" data-tooltip>56</td>
+                            <td class="source">                debug(&#x27;cmp with&#x27;, models[0][app.key].map( callback ))</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>172</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>12</td>
-                            <td class="source">                return 0;</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>173</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">                // do not add if it exist</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>174</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>56</td>
+                            <td class="source">                let pos &#x3D; models[0][app.key].map( callback ).indexOf(callback(val)  );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>175</td>
@@ -1726,20 +1726,20 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>176</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                // let cb &#x3D; app.sort.callback ? app.sort.callback : ( val )&#x3D;&gt; {</td>
+                            <td class="hits" data-tooltip>56</td>
+                            <td class="source">                debug(&#x27;pos&#x27;, pos)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>177</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                //     return val</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>178</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                // };</td>
+                            <td class="hits" data-tooltip>56</td>
+                            <td class="source">                if ( pos !&#x3D; -1 ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>179</td>
@@ -1751,103 +1751,103 @@
                             <td class="line" data-tooltip>180</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                // a &#x3D; app.sort.key ? cb( a[app.sort.key] ) : cb( a );</td>
+                            <td class="source">                    // update if value exists</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>181</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                // b &#x3D; app.sort.key ? cb( b[app.sort.key] ) : cb( b );</td>
+                            <td class="hits" data-tooltip>26</td>
+                            <td class="source">                    if ( app.unique.key ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>182</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                //</td>
+                            <td class="hits" data-tooltip>10</td>
+                            <td class="source">                        debug( &#x27;update since unique key&#x27; );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>183</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                // if ( (a - b) &#x3D;&#x3D; NaN ) {</td>
+                            <td class="hits" data-tooltip>10</td>
+                            <td class="source">                        for ( let key in val ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>184</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                //     let msg &#x3D; &#x27;Sorry a-b&#x3D;NaN, callback needs to return number a&#x3D;&#x27; + a + &#x27; b&#x3D;&#x27; + b;</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>185</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                //     throw msg</td>
+                            <td class="hits" data-tooltip>18</td>
+                            <td class="source">                            models[0][app.key][pos][key] &#x3D;  val[key]</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>186</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                // }</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>187</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                //</td>
+                            <td class="source">                        }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>188</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                // debug(&#x27;val * (a - b)&#x27;, val,val * (a - b), a, b)</td>
+                            <td class="source">                    }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>189</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">                //</td>
+                            <td class="source">                    // }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>190</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">                // return val * (a - b);</td>
+                            <td class="hits" data-tooltip>26</td>
+                            <td class="source">                    add &#x3D; false;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>191</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">                }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>192</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            } );</td>
+                            <td class="source">            }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>193</td>
-                            <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>14</td>
-                            <td class="source">            debug(&#x27;sort res&#x27;,res)</td>
-                        </tr>
-                        <tr class="hit">
-                            <td class="line" data-tooltip>194</td>
-                            <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">        }</td>
-                        </tr>
-                        <tr class="hit">
-                            <td class="line" data-tooltip>195</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source"></td>
                         </tr>
                         <tr class="hit">
+                            <td class="line" data-tooltip>194</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>58</td>
+                            <td class="source">            if ( add ) {</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>195</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>32</td>
+                            <td class="source">                models[0][app.key].push( val )</td>
+                        </tr>
+                        <tr class="hit">
                             <td class="line" data-tooltip>196</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">    } );</td>
+                            <td class="source">            }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>197</td>
@@ -1858,80 +1858,80 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>198</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>16</td>
-                            <td class="source">    return res</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        } );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>199</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>34</td>
+                            <td class="source">        res[app.key] &#x3D; models[0][app.key];</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>200</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">}</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>201</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">        // Sort elements</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>202</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">function createOrUpdate( options, done ) {</td>
+                            <td class="hits" data-tooltip>34</td>
+                            <td class="source">        if ( app.sort ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>203</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">    // var calls&#x3D;[];</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>204</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>26</td>
+                            <td class="source">            res[app.key]&#x3D;sortElements(res[app.key], app.sort.order , app.sort.key)</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>205</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>13</td>
-                            <td class="source">    debug( &#x27;entering createOrUpdate&#x27; )</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>206</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">        }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>207</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>13</td>
-                            <td class="source">    var current &#x3D; Promise.resolve();</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>208</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">    } );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>209</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>13</td>
-                            <td class="source">    let p&#x3D; Promise.all( options.results.map( ( res )&#x3D;&gt; {</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>210</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">        current &#x3D; current.then( function () {</td>
+                            <td class="hits" data-tooltip>28</td>
+                            <td class="source">    return res</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>211</td>
@@ -1943,25 +1943,25 @@
                             <td class="line" data-tooltip>212</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">            return _createOrUpdate( options, res )</td>
+                            <td class="source">}</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>213</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">        } );</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>214</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">function createOrUpdate( options, done ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>215</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>43</td>
-                            <td class="source">        return current;</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">    // var calls&#x3D;[];</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>216</td>
@@ -1972,8 +1972,8 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>217</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">    } ) ).then( ( results )&#x3D;&gt; {</td>
+                            <td class="hits" data-tooltip>14</td>
+                            <td class="source">    debug( &#x27;entering createOrUpdate&#x27; )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>218</td>
@@ -1984,8 +1984,8 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>219</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">        if ( done ) {</td>
+                            <td class="hits" data-tooltip>14</td>
+                            <td class="source">    var current &#x3D; Promise.resolve();</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>220</td>
@@ -1996,44 +1996,44 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>221</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>9</td>
-                            <td class="source">            debug(&#x27;No promise return&#x27;)</td>
+                            <td class="hits" data-tooltip>14</td>
+                            <td class="source">    let p&#x3D; Promise.all( options.results.map( ( res )&#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>222</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>9</td>
-                            <td class="source">            done( null, results );</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        current &#x3D; current.then( function () {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>223</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">        }</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>224</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">        else {</td>
+                            <td class="source">            return _createOrUpdate( options, res )</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>225</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
-                            <td class="source">            debug(&#x27;Return promise&#x27;);</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        } );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>226</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
-                            <td class="source">            return results</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>227</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">        }</td>
+                            <td class="hits" data-tooltip>48</td>
+                            <td class="source">        return current;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>228</td>
@@ -2045,7 +2045,7 @@
                             <td class="line" data-tooltip>229</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">    } ).catch( ( err )&#x3D;&gt; {</td>
+                            <td class="source">    } ) ).then( ( results )&#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>230</td>
@@ -2056,89 +2056,161 @@
                         <tr class="hit">
                             <td class="line" data-tooltip>231</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>1</td>
-                            <td class="source">        if ( done ) done( err, null );</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        if ( done ) {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>232</td>
-                            <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>2</td>
-                            <td class="source">        else throw err</td>
-                        </tr>
-                        <tr class="hit">
-                            <td class="line" data-tooltip>233</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source"></td>
                         </tr>
                         <tr class="hit">
+                            <td class="line" data-tooltip>233</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>10</td>
+                            <td class="source">            debug(&#x27;No promise return&#x27;)</td>
+                        </tr>
+                        <tr class="hit">
                             <td class="line" data-tooltip>234</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source">    } );</td>
+                            <td class="hits" data-tooltip>10</td>
+                            <td class="source">            done( null, results );</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>235</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">        }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>236</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>13</td>
-                            <td class="source">    debug(p)</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        else {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>237</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="hits" data-tooltip>1</td>
+                            <td class="source">            debug(&#x27;Return promise&#x27;);</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>238</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>13</td>
-                            <td class="source">    return p</td>
+                            <td class="hits" data-tooltip>1</td>
+                            <td class="source">            return results</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>239</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">        }</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>240</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">}</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>241</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">    } ).catch( ( err )&#x3D;&gt; {</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>242</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>243</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>1</td>
+                            <td class="source">        if ( done ) done( err, null );</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>244</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>2</td>
+                            <td class="source">        else throw err</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>245</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>246</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">    } );</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>247</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>248</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>14</td>
+                            <td class="source">    debug(p)</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>249</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>250</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>14</td>
+                            <td class="source">    return p</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>251</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>252</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">}</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>253</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source"></td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>254</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip>1</td>
                             <td class="source">module.exports &#x3D; {</td>
                         </tr>
                         <tr class="hit">
-                            <td class="line" data-tooltip>243</td>
+                            <td class="line" data-tooltip>255</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source">    &#x27;createOrUpdate&#x27;: createOrUpdate</td>
                         </tr>
                         <tr class="hit">
-                            <td class="line" data-tooltip>244</td>
+                            <td class="line" data-tooltip>256</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source">};</td>
                         </tr>
                         <tr class="hit">
-                            <td class="line" data-tooltip>245</td>
+                            <td class="line" data-tooltip>257</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source"></td>
@@ -2441,8 +2513,8 @@
                 <h2 id="models/test.js">models/test.js</h2>
                 <div class="stats high">
                     <div class="percentage">100%</div>
-                    <div class="sloc">19</div>
-                    <div class="hits">19</div>
+                    <div class="sloc">20</div>
+                    <div class="hits">20</div>
                     <div class="misses">0</div>
                 </div>
                 <table>
@@ -2549,52 +2621,58 @@
                             <td class="line" data-tooltip>16</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">        dummy3:&#x27;json&#x27;</td>
+                            <td class="source">        dummy3:&#x27;json&#x27;,</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>17</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">    },</td>
+                            <td class="source">        dummy4:&#x27;json&#x27;</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>18</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source"></td>
+                            <td class="source">    },</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>19</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">    createOrUpdate:function(options, callback){</td>
+                            <td class="source"></td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>20</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">        // console.dir()</td>
+                            <td class="source">    createOrUpdate:function(options, callback){</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>21</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
-                            <td class="source">        options.model&#x3D;this;//options.server.getModel(&#x27;test&#x27;);</td>
+                            <td class="source">        // console.dir()</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>22</td>
                             <td class="lint empty"></td>
-                            <td class="hits" data-tooltip>12</td>
-                            <td class="source">        return we.createOrUpdate(options, callback)</td>
+                            <td class="hits" data-tooltip></td>
+                            <td class="source">        options.model&#x3D;this;//options.server.getModel(&#x27;test&#x27;);</td>
                         </tr>
                         <tr class="hit">
                             <td class="line" data-tooltip>23</td>
+                            <td class="lint empty"></td>
+                            <td class="hits" data-tooltip>13</td>
+                            <td class="source">        return we.createOrUpdate(options, callback)</td>
+                        </tr>
+                        <tr class="hit">
+                            <td class="line" data-tooltip>24</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source">    }</td>
                         </tr>
                         <tr class="hit">
-                            <td class="line" data-tooltip>24</td>
+                            <td class="line" data-tooltip>25</td>
                             <td class="lint empty"></td>
                             <td class="hits" data-tooltip></td>
                             <td class="source">};</td>
