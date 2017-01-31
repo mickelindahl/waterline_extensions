@@ -121,13 +121,15 @@ function sortElements(elements, order, key){
         let val;
 
         if ( order == 'ascending' ) {
-            debug('ascending', order)
+
             val = 1;
+
         }
 
         if ( order == 'descending' ) {
-            debug('descending', order)
+
             val = -1;
+
         }
 
         if ( a < b )
@@ -160,14 +162,12 @@ function appemdOrUpdate( options, res, models, reject ) {
 
             }
 
-
             if ( app.unique ) {
 
                 let callback=elementOperation(app.unique.key);
 
                 debug('callback', callback);
-                debug('cmp', callback(val) , app.key, models);
-                debug(app)
+                debug('cmp', callback(val) , app.key);
                 debug('cmp with', models[0][app.key].map( callback ))
 
                 // do not add if it exist
