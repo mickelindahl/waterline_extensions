@@ -3,7 +3,7 @@
  */
 'use strict';
 const Promise = require( 'bluebird' )
-const debug = require( 'debug' )( 'waterline_extension' );
+const debug = require( 'debug' )( 'waterline_extension:index' );
 
 
 function _createOrUpdate( options, res ) {
@@ -15,7 +15,7 @@ function _createOrUpdate( options, res ) {
             criteria[key] = res[key]
         } );
 
-        debug( 'Criteria', criteria );
+        debug( '_createOrUpdate criteria', criteria );
 
         options.model.find( criteria ).then(models => {
 
@@ -23,7 +23,7 @@ function _createOrUpdate( options, res ) {
 
             if ( models.length == 0 ) {
 
-                debug( '\x1b[0;31mModel not found creating\x1b[0;37m' );
+                debug('_createOrUpdate', '\x1b[0;31mModel not found creating\x1b[0;37m' );
 
                 // If append or update options and sort elements
                 if ( options.append_or_update ) {
@@ -32,7 +32,7 @@ function _createOrUpdate( options, res ) {
 
                         if ( app.sort ) {
 
-                            debug('sorting elements')
+                            debug('_createOrUpdate sorting elements')
                             res[app.key] = sortElements( res[app.key], app.sort.order, app.sort.key )
 
                         }
@@ -47,12 +47,11 @@ function _createOrUpdate( options, res ) {
             } else {
 
                 if ( models.length != 1 ) {
-                    debug( 'More than one model exit for that key, now allowed!' );
                     models.forEach(m=>{JSON.stringify(models)});
                     return reject( 'More than one model exit for that key, now allowed!' )
                 }
 
-                debug( '\x1b[0;33mModel found updating\x1b[0;37m' );
+                debug( '_createOrUpdate \x1b[0;33mModel found updating\x1b[0;37m' );
 
                 // Push values to arrays or append to value if it exists in the array
                 if ( options.append_or_update ) {
@@ -61,8 +60,8 @@ function _createOrUpdate( options, res ) {
                 }
 
                 promise=options.model.update( criteria, res ).then( model => {
-                    debug('createdAt',model[0].createdAt)
-                    debug('updatedAt', model[0].updatedAt)
+                    debug('_createOrUpdate createdAt',model[0].createdAt)
+                    debug('_createOrUpdate updatedAt', model[0].updatedAt)
 
                     resolve( model[0] )
 
@@ -82,6 +81,8 @@ function _createOrUpdate( options, res ) {
 function elementOperation(key){
 
     let callback;
+
+    debug('elementOperation')
 
     switch ( typeof key ) {
 
@@ -107,10 +108,9 @@ function elementOperation(key){
 
 function sortElements(elements, order, key){
 
-    debug('sorting order', order, 'key', key)
+    debug('sortElements order', order, 'key', key)
 
     let callback=elementOperation(key);;
-    let cmp;
 
     // sort on each post by time
     elements.sort( ( a, b )=> {
@@ -146,6 +146,8 @@ function sortElements(elements, order, key){
 
 function appemdOrUpdate( options, res, models, reject ) {
 
+    debug('appendOrUpdate', models.length, 'models')
+
     options.append_or_update.forEach( ( app )=> {
 
         // Add to element if exist else just add element
@@ -153,7 +155,7 @@ function appemdOrUpdate( options, res, models, reject ) {
 
             let add = true;
 
-            debug(app.unique)
+            debug('appendOrUpdate', app.unique)
 
             // If it yet does not exist
             if (!models[0][app.key]){
@@ -166,20 +168,20 @@ function appemdOrUpdate( options, res, models, reject ) {
 
                 let callback=elementOperation(app.unique.key);
 
-                debug('callback', callback);
-                debug('cmp', callback(val) , app.key);
-                debug('cmp with', models[0][app.key].map( callback ))
+                debug('appendOrUpdate callback', callback);
+                debug('appendOrUpdate cmp', callback(val) , app.key);
+                debug('appendOrUpdate cmp with', models[0][app.key].map( callback ))
 
                 // do not add if it exist
                 let pos = models[0][app.key].map( callback ).indexOf(callback(val)  );
 
-                debug('pos', pos)
+                debug('appendOrUpdate pos', pos)
 
                 if ( pos != -1 ) {
 
                     // update if value exists
                     if ( app.unique.key ) {
-                        debug( 'update since unique key' );
+                        debug( 'appendOrUpdate update since unique key' );
                         for ( let key in val ) {
 
                             models[0][app.key][pos][key] =  val[key]
