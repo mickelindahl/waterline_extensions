@@ -225,9 +225,8 @@ function appemdOrUpdate( options, res, models, reject ) {
 }
 
 function createOrUpdate( options, done ) {
-    // var calls=[];
 
-    debug( 'entering createOrUpdate' )
+    debug( 'createOrUpdate' )
 
     var current = Promise.resolve();
 
@@ -243,11 +242,11 @@ function createOrUpdate( options, done ) {
 
         if ( done ) {
 
-            debug('No promise return')
+            debug('createOrUpdate No promise return')
             done( null, results );
         }
         else {
-            debug('Return promise');
+            debug('createOrUpdate Return promise');
             return results
         }
 
@@ -257,8 +256,6 @@ function createOrUpdate( options, done ) {
         else throw err
 
     } );
-
-    debug(p)
 
     return p
 
