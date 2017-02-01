@@ -184,8 +184,19 @@ function appemdOrUpdate( options, res, models, reject ) {
                         debug( 'appendOrUpdate update since unique key' );
                         for ( let key in val ) {
 
-                            models[0][app.key][pos][key] =  val[key]
+                            if (typeof val[key] == 'object'){
 
+                                for (let skey in val[key]){
+
+                                    models[0][app.key][pos][key][skey] =  val[key][skey]
+
+                                }
+
+                            } else{
+
+                                models[0][app.key][pos][key] =  val[key]
+
+                            }
                         }
                     }
                     // }
