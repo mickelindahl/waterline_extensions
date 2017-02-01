@@ -170,7 +170,7 @@ function appemdOrUpdate( options, res, models, reject ) {
 
                 debug('appendOrUpdate callback', callback);
                 debug('appendOrUpdate cmp', callback(val) , app.key);
-                debug('appendOrUpdate cmp with', models[0][app.key].map( callback ).length)
+                debug('appendOrUpdate cmp list with ', models[0][app.key].map( callback ).length, 'entries')
 
                 // do not add if it exist
                 let pos = models[0][app.key].map( callback ).indexOf(callback(val)  );
