@@ -168,14 +168,11 @@ function appemdOrUpdate( options, res, models, reject ) {
                 let callback=elementOperation(app.unique.key);
 
                 debug('appendOrUpdate callback', callback);
-                debug('appendOrUpdate compare value', callback(val) , app.key);
-                debug('appendOrUpdate with list ', models[0][app.key].map( callback ).length, 'entries')
-                debug('appendOrUpdate where first entry is ', models[0][app.key].map( callback )[0])
+                debug('appendOrUpdate compare', callback(val), 'with',
+                    models[0][app.key].map( callback ).length, 'entries',
+                    '1st entry:', models[0][app.key].map( callback )[0])
 
-                // do not add if it exist
                 let pos = models[0][app.key].map( callback ).indexOf(callback(val)  );
-
-                debug('appendOrUpdate pos', pos)
 
                 if ( pos != -1 ) {
 
