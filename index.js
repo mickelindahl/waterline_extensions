@@ -97,7 +97,6 @@ function elementOperation(key){
 
         case 'function':
 
-            debug('it is a function');
             callback=key;
             break
     }
@@ -169,8 +168,9 @@ function appemdOrUpdate( options, res, models, reject ) {
                 let callback=elementOperation(app.unique.key);
 
                 debug('appendOrUpdate callback', callback);
-                debug('appendOrUpdate cmp', callback(val) , app.key);
-                debug('appendOrUpdate cmp list with ', models[0][app.key].map( callback ).length, 'entries')
+                debug('appendOrUpdate compare value', callback(val) , app.key);
+                debug('appendOrUpdate with list ', models[0][app.key].map( callback ).length, 'entries')
+                debug('appendOrUpdate where first entry is ', models[0][app.key].map( callback )[0])
 
                 // do not add if it exist
                 let pos = models[0][app.key].map( callback ).indexOf(callback(val)  );
