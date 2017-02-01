@@ -184,11 +184,7 @@ function appemdOrUpdate( options, res, models, reject ) {
                         debug( 'appendOrUpdate update since unique key' );
                         for ( let key in val ) {
 
-                            if (app.unique.ignore && app.unique.ignore.indexOf('key')!=-1){
-                                return
-                            }
-
-                                models[0][app.key][pos][key] =  val[key]
+                            models[0][app.key][pos][key] =  val[key]
 
                         }
                     }
