@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/lab -m 10000 -r lcov | ./node_modules/.bin/coveralls",
+    "test-local": "node_modules/.bin/lab -m 10000 -l",
     "test-cov-html": "./node_modules/.bin/lab -l -r html -o coverage.html"
   },
   "repository": {

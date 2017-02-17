@@ -5,41 +5,45 @@
 const Promise = require( 'bluebird' )
 const debug = require( 'debug' )( 'waterline_extension:index' );
 
+let counter;
 
-function _createOrUpdate( options, res ) {
+function _createOrUpdate( args ) {
 
-    return new Promise( ( resolve, reject )=> {
+    let options = args[0]
+    let res = args[1]
+
+    return new Promise( ( resolve, reject ) => {
 
         let criteria = {};
-        options.keys.forEach( ( key )=> {
+        options.keys.forEach( ( key ) => {
             criteria[key] = res[key]
         } );
 
         debug( '_createOrUpdate criteria', criteria );
 
-        options.model.find( criteria ).then(models => {
+        options.model.find( criteria ).then( models => {
 
             let promise;
 
             if ( models.length == 0 ) {
 
-                debug('_createOrUpdate', '\x1b[0;31mModel not found creating\x1b[0;37m' );
+                debug( '_createOrUpdate', '\x1b[0;31mModel not found creating\x1b[0;37m' );
 
                 // If append or update options and sort elements
                 if ( options.append_or_update ) {
 
-                    options.append_or_update.forEach(app=>{
+                    options.append_or_update.forEach( app => {
 
                         if ( app.sort ) {
 
-                            debug('_createOrUpdate sorting elements')
+                            debug( '_createOrUpdate sorting elements' )
                             res[app.key] = sortElements( res[app.key], app.sort.order, app.sort.key )
 
                         }
-                    })
+                    } )
                 }
 
-                promise=options.model.create( res ).then(model =>{
+                promise = options.model.create( res ).then( model => {
 
                     resolve( model )
 
@@ -47,7 +51,7 @@ function _createOrUpdate( options, res ) {
             } else {
 
                 if ( models.length != 1 ) {
-                    models.forEach(m=>{JSON.stringify(models)});
+                    models.forEach( m => {JSON.stringify( models )} );
                     return reject( 'More than one model exit for that key, now allowed!' )
                 }
 
@@ -59,45 +63,45 @@ function _createOrUpdate( options, res ) {
                     // debug('updating',res)
                 }
 
-                promise=options.model.update( criteria, res ).then( model => {
-                    debug('_createOrUpdate createdAt',model[0].createdAt)
-                    debug('_createOrUpdate updatedAt', model[0].updatedAt)
+                promise = options.model.update( criteria, res ).then( model => {
+                    debug( '_createOrUpdate createdAt', model[0].createdAt )
+                    debug( '_createOrUpdate updatedAt', model[0].updatedAt )
 
                     resolve( model[0] )
 
                 } );
             }
             // Attached catch
-            promise.catch(err=>{
+            promise.catch( err => {
 
                 return reject( err );
 
-            });
+            } );
 
         } )
     } )
 }
 
-function elementOperation(key){
+function elementOperation( key ) {
 
     let callback;
 
-    debug('elementOperation')
+    debug( 'elementOperation' )
 
     switch ( typeof key ) {
 
         case "undefined":
-            callback = ( e )=> {return e};
+            callback = ( e ) => {return e};
             break;
 
         case 'string':
 
-            callback = ( e )=> { e[key]};
+            callback = ( e ) => { e[key]};
             break;
 
         case 'function':
 
-            callback=key;
+            callback = key;
             break
     }
 
@@ -105,17 +109,18 @@ function elementOperation(key){
 
 }
 
-function sortElements(elements, order, key){
+function sortElements( elements, order, key ) {
 
-    debug('sortElements order', order, 'key', key)
+    debug( 'sortElements order', order, 'key', key )
 
-    let callback=elementOperation(key);;
+    let callback = elementOperation( key );
+    ;
 
     // sort on each post by time
-    elements.sort( ( a, b )=> {
+    elements.sort( ( a, b ) => {
 
-        a=callback(a)
-        b=callback(b)
+        a = callback( a )
+        b = callback( b )
 
         let val;
 
@@ -131,10 +136,12 @@ function sortElements(elements, order, key){
 
         }
 
-        if ( a < b )
+        if ( a < b ) {
             return -1*val;
-        if ( a > b )
+        }
+        if ( a > b ) {
             return 1*val;
+        }
         return 0;
 
     } );
@@ -145,34 +152,34 @@ function sortElements(elements, order, key){
 
 function appemdOrUpdate( options, res, models, reject ) {
 
-    debug('appendOrUpdate', models.length, 'models')
+    debug( 'appendOrUpdate', models.length, 'models' )
 
-    options.append_or_update.forEach( ( app )=> {
+    options.append_or_update.forEach( app => {
 
         // Add to element if exist else just add element
-        res[app.key].forEach( ( val )=> {
+        res[app.key].forEach( ( val ) => {
 
             let add = true;
 
-            debug('appendOrUpdate', app.unique)
+            debug( 'appendOrUpdate', app.unique )
 
             // If it yet does not exist
-            if (!models[0][app.key]){
+            if ( !models[0][app.key] ) {
 
-                models[0][app.key]=[val]
+                models[0][app.key] = [val]
 
             }
 
             if ( app.unique ) {
 
-                let callback=elementOperation(app.unique.key);
+                let callback = elementOperation( app.unique.key );
 
-                debug('appendOrUpdate callback', callback);
-                debug('appendOrUpdate compare', callback(val), 'with',
+                debug( 'appendOrUpdate callback', callback );
+                debug( 'appendOrUpdate compare', callback( val ), 'with',
                     models[0][app.key].map( callback ).length, 'entries',
-                    '1st entry:', models[0][app.key].map( callback )[0])
+                    '1st entry:', models[0][app.key].map( callback )[0] )
 
-                let pos = models[0][app.key].map( callback ).indexOf(callback(val)  );
+                let pos = models[0][app.key].map( callback ).indexOf( callback( val ) );
 
                 if ( pos != -1 ) {
 
@@ -181,17 +188,17 @@ function appemdOrUpdate( options, res, models, reject ) {
                         debug( 'appendOrUpdate update since unique key' );
                         for ( let key in val ) {
 
-                            if (typeof val[key] == 'object'){
+                            if ( typeof val[key] == 'object' ) {
 
-                                for (let skey in val[key]){
+                                for ( let skey in val[key] ) {
 
-                                    models[0][app.key][pos][key][skey] =  val[key][skey]
+                                    models[0][app.key][pos][key][skey] = val[key][skey]
 
                                 }
 
-                            } else{
+                            } else {
 
-                                models[0][app.key][pos][key] =  val[key]
+                                models[0][app.key][pos][key] = val[key]
 
                             }
                         }
@@ -211,7 +218,7 @@ function appemdOrUpdate( options, res, models, reject ) {
         // Sort elements
         if ( app.sort ) {
 
-            res[app.key]=sortElements(res[app.key], app.sort.order , app.sort.key)
+            res[app.key] = sortElements( res[app.key], app.sort.order, app.sort.key )
 
         }
 
@@ -225,34 +232,41 @@ function createOrUpdate( options, done ) {
 
     debug( 'createOrUpdate' )
 
-    var current = Promise.resolve();
+    //var current = Promise.resolve();
 
-    let p= Promise.all( options.results.map( ( res )=> {
-        current = current.then( function () {
+    let p = Promise.resolve( options.results.map( res => {
+                       //let p= Promise.eacj( options.results.map( ( res )=> {
+                       //current = current.then( function () {
+                       //
+                       //    return _createOrUpdate( options, res )
+                       //} );
+                       //return _createOrUpdate( options, res )
+                       return [options, res]
+                       //
+                       //return current;
+                   } ) )
+                   .mapSeries( _createOrUpdate )
+                   .then( ( results ) => {
 
-            return _createOrUpdate( options, res )
+                       if ( done ) {
+
+                           debug( 'createOrUpdate No promise return' )
+                           done( null, results );
+                       }
+                       else {
+                           debug( 'createOrUpdate Return promise' );
+                           return results
+                       }
+
+                   } ).catch( ( err ) => {
+
+            if ( done ) {
+                done( err, null );
+            } else {
+                throw err
+            }
+
         } );
-
-        return current;
-
-    } ) ).then( ( results )=> {
-
-        if ( done ) {
-
-            debug('createOrUpdate No promise return')
-            done( null, results );
-        }
-        else {
-            debug('createOrUpdate Return promise');
-            return results
-        }
-
-    } ).catch( ( err )=> {
-
-        if ( done ) done( err, null );
-        else throw err
-
-    } );
 
     return p
 
