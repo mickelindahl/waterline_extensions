@@ -223,7 +223,7 @@ function appemdOrUpdate( options, res, models, reject ) {
 
 function createOrUpdate( options, done ) {
 
-    debug( 'createOrUpdate' )
+    debug( 'createOrUpdate options.results' , options.results)
 
     var current = Promise.resolve();
 
@@ -231,6 +231,7 @@ function createOrUpdate( options, done ) {
         current = current.then( function () {
 
             return _createOrUpdate( options, res )
+
         } );
 
         return current;
