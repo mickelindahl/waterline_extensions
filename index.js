@@ -266,6 +266,8 @@ function createOrUpdate( options, done ) {
                 throw err
             }
 
+        } );
+
     return p
 
 }
