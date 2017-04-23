@@ -161,8 +161,6 @@ function appemdOrUpdate( options, res, models, reject ) {
 
             let add = true;
 
-            debug( 'appendOrUpdate', app.unique )
-
             // If it yet does not exist
             if ( !models[0][app.key] ) {
 
@@ -174,18 +172,13 @@ function appemdOrUpdate( options, res, models, reject ) {
 
                 let callback = elementOperation( app.unique.key );
 
-                debug( 'appendOrUpdate callback', callback );
-                debug( 'appendOrUpdate compare', callback( val ), 'with',
-                    models[0][app.key].map( callback ).length, 'entries',
-                    '1st entry:', models[0][app.key].map( callback )[0] )
-
                 let pos = models[0][app.key].map( callback ).indexOf( callback( val ) );
 
                 if ( pos != -1 ) {
 
                     // update if value exists
                     if ( app.unique.key ) {
-                        debug( 'appendOrUpdate update since unique key' );
+
                         for ( let key in val ) {
 
                             if ( typeof val[key] == 'object' ) {
