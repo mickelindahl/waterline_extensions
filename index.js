@@ -151,7 +151,7 @@ function sortElements( elements, order, key ) {
 
 function appemdOrUpdate( options, res, models, reject ) {
 
-    debug( 'appendOrUpdate', models.length, 'models' );
+    // debug( 'appendOrUpdate', models.length, 'models' );
 
     options.append_or_update.forEach( app => {
 
@@ -238,7 +238,7 @@ function createOrUpdate( options, done ) {
                            done( null, results );
                        }
                        else {
-                           debug( 'createOrUpdate Return promise' );
+                           debug( 'createOrUpdate done', results.length );
                            return results
                        }
 
