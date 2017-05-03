@@ -86,7 +86,7 @@ function elementOperation( key ) {
 
     let callback;
 
-    debug( 'elementOperation' )
+    // debug( 'elementOperation' );
 
     switch ( typeof key ) {
 
@@ -111,10 +111,10 @@ function elementOperation( key ) {
 
 function sortElements( elements, order, key ) {
 
-    debug( 'sortElements order', order, 'key', key )
+    debug( 'sortElements order', order, 'key', key );
 
     let callback = elementOperation( key );
-    ;
+
 
     // sort on each post by time
     elements.sort( ( a, b ) => {
@@ -161,7 +161,7 @@ function appemdOrUpdate( options, res, models, reject ) {
 
             let add = true;
 
-            debug( 'appendOrUpdate', app.unique )
+            debug( 'appendOrUpdate', app.unique );
 
             // If it yet does not exist
             if ( !models[0][app.key] ) {
@@ -174,7 +174,6 @@ function appemdOrUpdate( options, res, models, reject ) {
 
                 let callback = elementOperation( app.unique.key );
 
-                debug( 'appendOrUpdate callback', callback );
                 debug( 'appendOrUpdate compare', callback( val ), 'with',
                     models[0][app.key].map( callback ).length, 'entries',
                     '1st entry:', models[0][app.key].map( callback )[0] )
@@ -185,7 +184,9 @@ function appemdOrUpdate( options, res, models, reject ) {
 
                     // update if value exists
                     if ( app.unique.key ) {
+
                         debug( 'appendOrUpdate update since unique key' );
+
                         for ( let key in val ) {
 
                             if ( typeof val[key] == 'object' ) {
@@ -230,7 +231,7 @@ function appemdOrUpdate( options, res, models, reject ) {
 
 function createOrUpdate( options, done ) {
 
-    debug( 'createOrUpdate options.results' , options.results)
+    debug( 'createOrUpdate options.results length' , options.results-length);
 
     //var current = Promise.resolve();
 
