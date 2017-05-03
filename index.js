@@ -1,16 +1,15 @@
 /**
  * Created by s057wl on 2016-07-18.
  */
-'use strict';
-const Promise = require( 'bluebird' )
-const debug = require( 'debug' )( 'waterline_extension:index' );
 
-let counter;
+'use strict';
+const Promise = require( 'bluebird' );
+const debug = require( 'debug' )( 'waterline_extension:index' );
 
 function _createOrUpdate( args ) {
 
-    let options = args[0]
-    let res = args[1]
+    let options = args[0];
+    let res = args[1];
 
     return new Promise( ( resolve, reject ) => {
 
@@ -19,7 +18,7 @@ function _createOrUpdate( args ) {
             criteria[key] = res[key]
         } );
 
-        debug( '_createOrUpdate criteria', criteria );
+        // debug( '_createOrUpdate criteria', criteria );
 
         options.model.find( criteria ).then( models => {
 
@@ -27,7 +26,7 @@ function _createOrUpdate( args ) {
 
             if ( models.length == 0 ) {
 
-                debug( '_createOrUpdate', '\x1b[0;31mModel not found creating\x1b[0;37m' );
+                // debug( '_createOrUpdate', '\x1b[0;31mModel not found creating\x1b[0;37m' );
 
                 // If append or update options and sort elements
                 if ( options.append_or_update ) {
@@ -36,7 +35,7 @@ function _createOrUpdate( args ) {
 
                         if ( app.sort ) {
 
-                            debug( '_createOrUpdate sorting elements' )
+                            // debug( '_createOrUpdate sorting elements' );
                             res[app.key] = sortElements( res[app.key], app.sort.order, app.sort.key )
 
                         }
@@ -55,7 +54,7 @@ function _createOrUpdate( args ) {
                     return reject( 'More than one model exit for that key, now allowed!' )
                 }
 
-                debug( '_createOrUpdate \x1b[0;33mModel found updating\x1b[0;37m' );
+                // debug( '_createOrUpdate \x1b[0;33mModel found updating\x1b[0;37m' );
 
                 // Push values to arrays or append to value if it exists in the array
                 if ( options.append_or_update ) {
@@ -64,8 +63,9 @@ function _createOrUpdate( args ) {
                 }
 
                 promise = options.model.update( criteria, res ).then( model => {
-                    debug( '_createOrUpdate createdAt', model[0].createdAt )
-                    debug( '_createOrUpdate updatedAt', model[0].updatedAt )
+
+                    // debug( '_createOrUpdate createdAt', model[0].createdAt )
+                    // debug( '_createOrUpdate updatedAt', model[0].updatedAt )
 
                     resolve( model[0] )
 
@@ -111,16 +111,15 @@ function elementOperation( key ) {
 
 function sortElements( elements, order, key ) {
 
-    debug( 'sortElements order', order, 'key', key );
+    // debug( 'sortElements order', order, 'key', key );
 
     let callback = elementOperation( key );
-
 
     // sort on each post by time
     elements.sort( ( a, b ) => {
 
-        a = callback( a )
-        b = callback( b )
+        a = callback( a );
+        b = callback( b );
 
         let val;
 
@@ -152,7 +151,7 @@ function sortElements( elements, order, key ) {
 
 function appemdOrUpdate( options, res, models, reject ) {
 
-    debug( 'appendOrUpdate', models.length, 'models' )
+    debug( 'appendOrUpdate', models.length, 'models' );
 
     options.append_or_update.forEach( app => {
 
@@ -196,7 +195,7 @@ function appemdOrUpdate( options, res, models, reject ) {
                             }
                         }
                     }
-                    // }
+
                     add = false;
                 }
             }
@@ -225,25 +224,17 @@ function createOrUpdate( options, done ) {
 
     debug( 'createOrUpdate options.results' , options.results.length);
 
-    //var current = Promise.resolve();
-
     let p = Promise.resolve( options.results.map( res => {
-                       //let p= Promise.eacj( options.results.map( ( res )=> {
-                       //current = current.then( function () {
-                       //
-                       //    return _createOrUpdate( options, res )
-                       //} );
-                       //return _createOrUpdate( options, res )
-                       return [options, res]
-                       //
-                       //return current;
+
+                       return [options, res];
+
                    } ) )
                    .mapSeries( _createOrUpdate )
                    .then( ( results ) => {
 
                        if ( done ) {
 
-                           debug( 'createOrUpdate No promise return' )
+                           debug( 'createOrUpdate No promise return' );
                            done( null, results );
                        }
                        else {
