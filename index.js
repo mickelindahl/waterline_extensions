@@ -223,7 +223,7 @@ function appemdOrUpdate( options, res, models, reject ) {
 
 function createOrUpdate( options, done ) {
 
-    debug( 'createOrUpdate options.results' , options.length.results)
+    debug( 'createOrUpdate options.results' , options.results.length);
 
     //var current = Promise.resolve();
 

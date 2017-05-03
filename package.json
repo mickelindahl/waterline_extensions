@@ -1,6 +1,6 @@
 {
   "name": "waterline-extensions",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Extensions methods to waterline",
   "main": "index.js",
   "scripts": {
